@@ -103,7 +103,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     // BOOKS
-
     public Boolean insertBook(String isbn_10, String isbn_13, String title, String author, String category, String description, String pubDate, String dateAdded, String pdfFile, int save_count, int like_count) {
         try {
             SQLiteDatabase db = this.getWritableDatabase();

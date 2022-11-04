@@ -2,7 +2,6 @@
 <resources>
     <array name="preloaded_fonts" translatable="false">
         <item>@font/inter_semibold</item>
-        <item>@font/inter_thin</item>
         <item>@font/playfair_display</item>
     </array>
 </resources>
