@@ -17,23 +17,17 @@ public class BookList implements Serializable {
     }
 
     public void loadBooks(int userId, DatabaseHelper dbHelper) {
+        Cursor myList = dbHelper.execRawQuery(String.format("SELECT B.isbn_10, B.isbn_13, B.title, B.author , B.category, B.description, B.pubDate, B.dateAdded, B.pdfFile, B.save_count, B.like_count from booklist as BL INNER JOIN book as B on BL.isbn_10 = B.isbn_10 WHERE BL.userId=%d", userId), null);
 
-        // select bs.bookId as b_id, BS.title as title, BS.author as author from booklist as bs right join book as BS on BS.bookId = bs.bookId where bs.userId = 1;
-        // pubDate, dateAdded, pdfFile, int save_count, like_count
+        int foundBooksCount = myList.getCount();
 
-        Cursor myList = dbHelper.execRawQuery(String.format(
-                "select bs.bookId as bookId, BS.isbn_10 as isbn_10, BS.isbn_13 as isbn_13," +
-                        " BS.title as title, BS.author as author, BS.category as category, " +
-                        "BS.description as description, BS.pubDate as pubDate, BS.dateAdded as dateAdded, " +
-                        "BS.pdfFile as pdfFile, BS.save_count as save_count, BS.save_count as like_count " +
-                        "from booklist as bs inner join book as BS on BS.bookId = bs.bookId where bs.userId=%d",
-                userId
-        ), null);
+        if(foundBooksCount > 0) this.books = new Book[foundBooksCount];
+        else this.books = new Book[0];
 
-        this.books = new Book[myList.getCount()];
-
-        for (int x = 0; x < this.books.length; x++) {
+        int x = 0;
+        while (myList.moveToNext()) {
             this.books[x] = new Book(
+                    myList.getString(0),
                     myList.getString(1),
                     myList.getString(2),
                     myList.getString(3),
@@ -42,10 +36,10 @@ public class BookList implements Serializable {
                     myList.getString(6),
                     myList.getString(7),
                     myList.getString(8),
-                    myList.getString(9),
-                    myList.getInt(10),
-                    myList.getInt(11)
+                    myList.getInt(9),
+                    myList.getInt(10)
             );
+            x++;
         }
     }
 }

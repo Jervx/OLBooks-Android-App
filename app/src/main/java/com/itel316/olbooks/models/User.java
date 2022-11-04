@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.TimeZone;
+
 import com.itel316.olbooks.helpers.*;
 import com.itel316.olbooks.helpers.DatabaseHelper;
 
@@ -21,29 +22,26 @@ public class User implements Serializable {
     private int role;
     private int isLoggedIn;
     private Date dateJoined;
+    private BookList bookList;
 
-    public User(int userId, String email, String fname, String lname, String password, int isLoggedIn, Date dateJoined) {
-        this.userId = userId;
+    public User(String email, DatabaseHelper dbHelper) {
         this.email = email;
-        this.fname = fname;
-        this.lname = lname;
-        this.password = password;
-        this.isLoggedIn = isLoggedIn;
-        this.dateJoined = dateJoined;
+        fetchSelf(dbHelper);
     }
 
-    public void reInit(DatabaseHelper dbhelper){
+    public void fetchSelf(DatabaseHelper dbhelper) {
         Cursor findUser = dbhelper.getUser(String.format("SELECT * FROM user WHERE email = '%s';", email), null);
-        if( findUser == null || findUser.getCount() == 0 || !findUser.moveToNext()) return;
+        if (findUser == null || findUser.getCount() == 0 || !findUser.moveToNext()) return;
         setUserId(findUser.getInt(0));
         setEmail(findUser.getString(1));
         setFname(findUser.getString(2));
         setLname(findUser.getString(3));
         setPassword(findUser.getString(4));
         setIsLoggedIn(findUser.getInt(5));
+        this.bookList = getBookList(dbhelper);
     }
 
-    public BookList getBookList(DatabaseHelper dbHelper){
+    public BookList getBookList(DatabaseHelper dbHelper) {
         return new BookList(this.userId, dbHelper);
     }
 
@@ -63,7 +61,9 @@ public class User implements Serializable {
         return lname;
     }
 
-    public String getPassword () { return password; }
+    public String getPassword() {
+        return password;
+    }
 
     public int getRole() {
         return role;
@@ -114,9 +114,10 @@ public class User implements Serializable {
         sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
         sdf.setTimeZone(TimeZone.getTimeZone("CET"));
         String ISO = sdf.format(date);
-        System.out.println(ISO);
         return ISO;
     }
 
-    public static Date fromIoDateStringToDate(String ISODateString){ return Date.from(ZonedDateTime.parse(ISODateString).toInstant()); }
+    public static Date fromIoDateStringToDate(String ISODateString) {
+        return Date.from(ZonedDateTime.parse(ISODateString).toInstant());
+    }
 }

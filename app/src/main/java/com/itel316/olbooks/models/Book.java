@@ -1,6 +1,8 @@
 package com.itel316.olbooks.models;
 
-public class Book {
+import java.io.Serializable;
+
+public class Book implements Serializable {
 
     String isbn_10, isbn_13, title, author, category, description, pubDate, dateAdded, pdfFile;
     int save_count, like_count;

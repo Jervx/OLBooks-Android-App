@@ -56,13 +56,12 @@ public class Activity_Sign_In extends AppCompatActivity {
             }
 
             findUser.moveToNext();
-            User user = new User(findUser.getInt(0), findUser.getString(1), findUser.getString(2), findUser.getString(3), findUser.getString(4),findUser.getInt(5), User.fromIoDateStringToDate(findUser.getString(7)));
+            User user = new User(findUser.getString(1), dbhelper);
             if(!AuthHelper.comparePassword(password_val, user.getPassword())){
                 password.setError("Wrong Password!");
                 return;
             }
 
-            dbhelper.updateUserLoginState(user.getUserId(), 1);
             Intent homeIntent = new Intent(getApplicationContext(), Activity_Home.class);
             homeIntent.putExtra("CURRENT_USER", user);
             startActivity(homeIntent);
