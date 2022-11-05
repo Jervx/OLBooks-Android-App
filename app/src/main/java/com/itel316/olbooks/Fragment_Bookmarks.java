@@ -33,7 +33,6 @@ public class Fragment_Bookmarks extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        System.out.println("ON CREATE");
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);

@@ -17,6 +17,7 @@ public class Activity_Home extends AppCompatActivity {
 
     ActivityHomeBinding binding;
     private User currentUser;
+    private Fragment curFrag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,8 +77,13 @@ public class Activity_Home extends AppCompatActivity {
     }
     
     private void switchFragment(Fragment frag){
+        if(curFrag != null && frag.getClass() == curFrag.getClass()) {
+            System.out.println("Current Fragment is the same thus not changed fragment");
+            return;
+        }
         FragmentManager fragMan = getSupportFragmentManager();
         FragmentTransaction fragTrans = fragMan.beginTransaction();
+        curFrag = frag;
 
         fragTrans.replace(R.id.frame_fragment, frag);
         fragTrans.commit();

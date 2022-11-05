@@ -31,7 +31,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void checkTableExist() {
         SQLiteDatabase db = this.getWritableDatabase();
         String checkUserTable = "CREATE TABLE IF NOT EXISTS user ( userId INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT, fname TEXT, lname TEXT, password TEXT, role TEXT, isLoggedIn INTEGER, datejoined TEXT );";
-        String checkBookTable = "CREATE TABLE IF NOT EXISTS book ( ISBN_10 TEXT PRIMARY KEY, ISBN_13 TEXT, title TEXT, author TEXT, category TEXT, description TEXT, pubDate TEXT, dateAdded TEXT, pdfFile TEXT, save_count INTEGER, like_count INTEGER);";
+        String checkBookTable = "CREATE TABLE IF NOT EXISTS book ( photo TEXT, ISBN_10 TEXT PRIMARY KEY, ISBN_13 TEXT, title TEXT, author TEXT, category TEXT, description TEXT, pubDate TEXT, dateAdded TEXT, pdfFile TEXT, save_count INTEGER, like_count INTEGER);";
         String checkBookList = "CREATE TABLE IF NOT EXISTS booklist ( bookListId INTEGER PRIMARY KEY AUTOINCREMENT, dateAdded TEXT, userId INTEGER, isbn_10 TEXT, isbn_13 TEXT );";
         String checkRecover = "CREATE TABLE IF NOT EXISTS recovery( recoveryId INTEGER PRIMARY KEY AUTOINCREMENT, requestDate TEXT, userId INTEGER );";
 
@@ -103,7 +103,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     // BOOKS
-    public Boolean insertBook(String isbn_10, String isbn_13, String title, String author, String category, String description, String pubDate, String dateAdded, String pdfFile, int save_count, int like_count) {
+    public Boolean insertBook(String photo, String isbn_10, String isbn_13, String title, String author, String category, String description, String pubDate, String dateAdded, String pdfFile, int save_count, int like_count) {
         try {
             SQLiteDatabase db = this.getWritableDatabase();
 
@@ -117,6 +117,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             ContentValues values = new ContentValues();
 
 //            isbn_10, isbn_13, title, author , category, description, pubDate, dateAdded, pdfFile, save_count, like_count
+            values.put("photo", photo);
             values.put("isbn_10", isbn_10);
             values.put("isbn_13", isbn_13);
             values.put("title", title);
@@ -153,14 +154,59 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     bookResult.getString(6),
                     bookResult.getString(7),
                     bookResult.getString(8),
-                    bookResult.getInt(9),
-                    bookResult.getInt(10)
+                    bookResult.getString(9),
+                    bookResult.getInt(10),
+                    bookResult.getInt(11)
             );
             x++;
         }
 
         return books;
     }
+
+    public Book [] getBooksByTag(String [] tags){
+
+        String likes = "";
+
+        int counter = 0;
+        for(String tag : tags){
+            String fields = "title like '%%<~>%%' or category like '%%<~>%%' or author like '%%<~>%%'";
+            likes += fields.replaceAll("<~>", tag);
+            if(counter != tags.length - 1) likes += " or ";
+            counter ++;
+        }
+
+        System.out.println(likes);
+
+        String prepared = "SELECT * FROM book";
+
+        if(tags.length > 0) prepared = String.format("SELECT * FROM book where %s", likes);
+
+        Cursor bookResult = execRawQuery(prepared, null);
+        Book [] books = new Book[bookResult.getCount()];
+
+        int x = 0;
+        while (bookResult.moveToNext()) {
+            books[x] = new Book(
+                    bookResult.getString(0),
+                    bookResult.getString(1),
+                    bookResult.getString(2),
+                    bookResult.getString(3),
+                    bookResult.getString(4),
+                    bookResult.getString(5),
+                    bookResult.getString(6),
+                    bookResult.getString(7),
+                    bookResult.getString(8),
+                    bookResult.getString(9),
+                    bookResult.getInt(10),
+                    bookResult.getInt(11)
+            );
+            x++;
+        }
+
+        return books;
+    }
+
 
     // BOOKLIST
     //dateAdded, userId, isbn_10, isbn_13

@@ -4,10 +4,11 @@ import java.io.Serializable;
 
 public class Book implements Serializable {
 
-    String isbn_10, isbn_13, title, author, category, description, pubDate, dateAdded, pdfFile;
+    String photo, isbn_10, isbn_13, title, author, category, description, pubDate, dateAdded, pdfFile;
     int save_count, like_count;
 
-    public Book(String isbn_10, String isbn_13, String title, String author, String category, String description, String pubDate, String dateAdded, String pdfFile, int save_count, int like_count) {
+    public Book(String photo, String isbn_10, String isbn_13, String title, String author, String category, String description, String pubDate, String dateAdded, String pdfFile, int save_count, int like_count) {
+        this.photo = photo;
         this.isbn_10 = isbn_10;
         this.isbn_13 = isbn_13;
         this.title = title;
@@ -19,6 +20,14 @@ public class Book implements Serializable {
         this.pdfFile = pdfFile;
         this.save_count = save_count;
         this.like_count = like_count;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
     public String getIsbn_10() {
@@ -63,5 +72,23 @@ public class Book implements Serializable {
 
     public int getLikes() {
         return like_count;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "photo='" + photo + '\'' +
+                ", isbn_10='" + isbn_10 + '\'' +
+                ", isbn_13='" + isbn_13 + '\'' +
+                ", title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", category='" + category + '\'' +
+                ", description='" + description + '\'' +
+                ", pubDate='" + pubDate + '\'' +
+                ", dateAdded='" + dateAdded + '\'' +
+                ", pdfFile='" + pdfFile + '\'' +
+                ", save_count=" + save_count +
+                ", like_count=" + like_count +
+                '}';
     }
 }

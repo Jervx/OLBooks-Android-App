@@ -10,13 +10,12 @@
         android:id="@+id/textView_greet"
         android:layout_width="154dp"
         android:layout_height="27dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="36dp"
         android:fontFamily="@font/inter"
         android:text="Hey User"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="@color/riverbed"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.099"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -28,20 +27,67 @@
         android:layout_marginTop="4dp"
         android:fontFamily="@font/inter_semibold"
         android:text="Let's Start Reading"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="@color/riverbed"
+        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_greet" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/book_viewpage"
-        android:layout_width="409dp"
-        android:layout_height="626dp"
-        android:layout_marginTop="36dp"
-        app:layout_constraintTop_toBottomOf="@+id/textView_greet2"
-        tools:layout_editor_absoluteX="1dp" >
+        android:layout_width="414dp"
+        android:layout_height="414dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent">
 
     </androidx.viewpager2.widget.ViewPager2>
+
+    <TextView
+        android:id="@+id/textview_TAG"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:text="Tags"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_greet2" />
+
+    <TextView
+        android:id="@+id/textview_tags"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/inter_semibold"
+        app:layout_constraintStart_toEndOf="@+id/textview_TAG"
+        app:layout_constraintTop_toBottomOf="@+id/textView_greet2" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chip_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview_TAG">
+
+
+    </com.google.android.material.chip.ChipGroup>
+
+    <Button
+        android:id="@+id/btn_add_filter"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="58dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:drawableLeft="@drawable/ic_baseline_add_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_greet2"
+        app:strokeColor="@color/transparent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

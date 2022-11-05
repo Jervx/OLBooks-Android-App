@@ -17,7 +17,7 @@ public class BookList implements Serializable {
     }
 
     public void loadBooks(int userId, DatabaseHelper dbHelper) {
-        Cursor myList = dbHelper.execRawQuery(String.format("SELECT B.isbn_10, B.isbn_13, B.title, B.author , B.category, B.description, B.pubDate, B.dateAdded, B.pdfFile, B.save_count, B.like_count from booklist as BL INNER JOIN book as B on BL.isbn_10 = B.isbn_10 WHERE BL.userId=%d", userId), null);
+        Cursor myList = dbHelper.execRawQuery(String.format("SELECT B.photo, B.isbn_10, B.isbn_13, B.title, B.author , B.category, B.description, B.pubDate, B.dateAdded, B.pdfFile, B.save_count, B.like_count from booklist as BL INNER JOIN book as B on BL.isbn_10 = B.isbn_10 WHERE BL.userId=%d", userId), null);
 
         int foundBooksCount = myList.getCount();
 
@@ -36,8 +36,9 @@ public class BookList implements Serializable {
                     myList.getString(6),
                     myList.getString(7),
                     myList.getString(8),
-                    myList.getInt(9),
-                    myList.getInt(10)
+                    myList.getString(9),
+                    myList.getInt(10),
+                    myList.getInt(11)
             );
             x++;
         }
