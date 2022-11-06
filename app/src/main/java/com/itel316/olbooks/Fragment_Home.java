@@ -3,6 +3,7 @@ package com.itel316.olbooks;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +36,9 @@ public class Fragment_Home extends Fragment implements Dialog_Fragment_One_Input
     private Button btn_addCategoryTag;
     private ViewGroup container;
     private TextView textview_tags;
+    private ViewPager2 swipe_view;
+
+    ArrayList<ViewPagerItem> viewPagerItemArrayList;
 
     public Fragment_Home() {
 
@@ -69,6 +73,8 @@ public class Fragment_Home extends Fragment implements Dialog_Fragment_One_Input
         chipContainer = (ChipGroup) view.findViewById(R.id.chip_container);
         btn_addCategoryTag = (Button) view.findViewById(R.id.btn_add_filter);
         textview_tags = (TextView) view.findViewById(R.id.textview_tags);
+        swipe_view = (ViewPager2) view.findViewById(R.id.viewpager_swipe);
+        viewPagerItemArrayList = new ArrayList<>();
 
         btn_addCategoryTag.setOnClickListener(e -> {
             openDialog();
@@ -90,7 +96,6 @@ public class Fragment_Home extends Fragment implements Dialog_Fragment_One_Input
         dialog_Fragment_one_input.setTargetFragment(Fragment_Home.this, 1);
         dialog_Fragment_one_input.show(getParentFragmentManager(), "Add Tag");
     }
-
 
     @Override
     public void applyTexts(String fieldOne) {
@@ -120,13 +125,29 @@ public class Fragment_Home extends Fragment implements Dialog_Fragment_One_Input
         String chosenTags[] = new String[category_tags.size()];
         int counter = 0;
         for(Chip chp : category_tags){
-            chosenTags[counter] = (String) category_tags.get(counter).getText();
-            counter++;
+            chosenTags[counter] = (String) chp.getText();
         }
 
         books = dbHelper.getBooksByTag(chosenTags);
-        for (Book book : books) System.out.println(book.toString());
+        viewPagerItemArrayList = new ArrayList<>();
+        for (Book book : books){
+            ViewPagerItem viewPagerItem = new ViewPagerItem(book);
+            viewPagerItemArrayList.add(viewPagerItem);
+        }
 
-        textview_tags.setText(String.format("Tags (%d Book Matched)", books.length));
+        textview_tags.setText(String.format("%d book found", books.length));
+
+        renderViewPager();
     }
+
+    public void renderViewPager(){
+        VPAdapter vpAdapter = new VPAdapter(viewPagerItemArrayList, (Activity_Home) getActivity());
+
+        swipe_view.setAdapter(vpAdapter);
+        swipe_view.setClipToPadding(false);
+        swipe_view.setClipChildren(false);
+        swipe_view.setOffscreenPageLimit(2);
+        swipe_view.getChildAt(0).setOverScrollMode(View.OVER_SCROLL_NEVER);
+    }
+
 }

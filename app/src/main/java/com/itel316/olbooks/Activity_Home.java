@@ -6,12 +6,15 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
+import android.view.View;
 
 import com.itel316.olbooks.databinding.ActivityHomeBinding;
 import com.itel316.olbooks.helpers.DatabaseHelper;
 import com.itel316.olbooks.models.User;
 
 import java.nio.BufferUnderflowException;
+import java.util.List;
 
 public class Activity_Home extends AppCompatActivity {
 
@@ -40,52 +43,77 @@ public class Activity_Home extends AppCompatActivity {
         initial_frag.setArguments(initialBundle);
         switchFragment(initial_frag);
 
-        binding.bottomNavigationView.setOnItemSelectedListener( nav_item -> {
+        binding.bottomNavigationView.setOnItemSelectedListener(nav_item -> {
 
             int id = nav_item.getItemId();
             Bundle bund = new Bundle();
             currentUser.fetchSelf(dbHelper);
             bund.putSerializable("curUser", currentUser);
-            System.out.println("FETCHED -> "+ currentUser.getEmail());
 
-            if(id == R.id.navigation_home){
+            if (id == R.id.navigation_home) {
                 Fragment_Home fragHome = new Fragment_Home();
                 fragHome.setArguments(bund);
                 switchFragment(fragHome);
             }
 
-            if(id == R.id.navigation_search){
-                Fragment_Search fragSearch = new Fragment_Search();
-                fragSearch.setArguments(bund);
-                switchFragment(fragSearch);
-            }
+//            if (id == R.id.navigation_search) {
+//                Fragment_Search fragSearch = new Fragment_Search();
+//                fragSearch.setArguments(bund);
+//                switchFragment(fragSearch);
+//            }
 
-            if(id == R.id.navigation_bookmarks){
+            if (id == R.id.navigation_bookmarks) {
                 Fragment_Bookmarks fragBookmarks = new Fragment_Bookmarks();
                 fragBookmarks.setArguments(bund);
                 switchFragment(fragBookmarks);
             }
 
-            if(id == R.id.navigation_profiles){
+            if (id == R.id.navigation_profiles) {
                 Fragment_Profile fragProfile = new Fragment_Profile();
                 fragProfile.setArguments(bund);
                 switchFragment(fragProfile);
             }
 
             return true;
-        } );
+        });
     }
-    
-    private void switchFragment(Fragment frag){
-        if(curFrag != null && frag.getClass() == curFrag.getClass()) {
-            System.out.println("Current Fragment is the same thus not changed fragment");
+
+    public void switchFragment(Fragment frag) {
+        if (curFrag != null && frag.getClass() == curFrag.getClass())
             return;
-        }
+
         FragmentManager fragMan = getSupportFragmentManager();
         FragmentTransaction fragTrans = fragMan.beginTransaction();
         curFrag = frag;
 
-        fragTrans.replace(R.id.frame_fragment, frag);
-        fragTrans.commit();
+        if(fragMan.getBackStackEntryCount() > 8) fragMan.popBackStack();
+
+        fragTrans.replace(R.id.frame_fragment, frag).addToBackStack("root_frag").commit();
     }
+
+    @Override
+    public void onBackPressed() {
+        int cnt = getSupportFragmentManager().getBackStackEntryCount();
+        if (cnt > 1) {
+            getSupportFragmentManager().popBackStackImmediate();
+            List<Fragment> frags = getSupportFragmentManager().getFragments();
+
+            int foc = 0;
+
+            if(frags.size() == 0){
+                foc = 0;
+            }else{
+                Fragment frag = getSupportFragmentManager().getFragments().get(frags.size() > 0 ? frags.size() - 1 : 0);
+                curFrag = frag;
+
+                if (frag.getClass() == Fragment_Home.class) foc = 0;
+//                if (frag.getClass() == Fragment_Search.class) foc = 1;
+                if (frag.getClass() == Fragment_Bookmarks.class) foc = 2;
+                if (frag.getClass() == Fragment_Profile.class) foc = 3;
+            }
+
+            binding.bottomNavigationView.getMenu().getItem(foc).setChecked(true);
+        } else finish();
+    }
+
 }

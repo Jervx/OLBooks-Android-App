@@ -109,15 +109,5 @@ public class User implements Serializable {
         this.dateJoined = dateJoined;
     }
 
-    public static String toISODateString(Date date) {
-        SimpleDateFormat sdf;
-        sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
-        sdf.setTimeZone(TimeZone.getTimeZone("CET"));
-        String ISO = sdf.format(date);
-        return ISO;
-    }
 
-    public static Date fromIoDateStringToDate(String ISODateString) {
-        return Date.from(ZonedDateTime.parse(ISODateString).toInstant());
-    }
 }

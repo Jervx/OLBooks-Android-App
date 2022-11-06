@@ -58,10 +58,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
             Cursor foundUser = getUser(String.format("SELECT * FROM user WHERE email='%s';", email), null);
 
-            if (foundUser.getCount() > 0) {
-                System.out.println("User already exist");
+            if (foundUser.getCount() > 0)
                 return false;
-            }
 
             ContentValues values = new ContentValues();
 
@@ -96,9 +94,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor result = null;
         try {
             result = this.getWritableDatabase().rawQuery(query, args);
-        } catch (Exception e) {
-            System.out.println("ERR SQL GET USER: " + e.toString());
-        }
+        } catch (Exception e) { }
         return result;
     }
 
@@ -110,7 +106,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             Cursor foundBook = getUser(String.format("SELECT * FROM book WHERE isbn_10='%s';", isbn_10), null);
 
             if (foundBook.getCount() > 0) {
-                System.out.println("Book already exist");
                 return false;
             }
 
@@ -176,8 +171,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             counter ++;
         }
 
-        System.out.println(likes);
-
         String prepared = "SELECT * FROM book";
 
         if(tags.length > 0) prepared = String.format("SELECT * FROM book where %s", likes);
@@ -217,7 +210,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             Cursor foundBook = getUser(String.format("SELECT * FROM booklist WHERE userId='%d' AND isbn_10='%s' AND isbn_13='%s';", userId, isbn_10, isbn_13), null);
 
             if (foundBook.getCount() > 0) {
-                System.out.println("Book already added");
                 return false;
             }
 
@@ -242,7 +234,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         try {
             result = this.getWritableDatabase().rawQuery(query, args);
         } catch (Exception e) {
-            System.out.println("Err Execute Query : " + e.toString());
         }
         return result;
     }
@@ -252,7 +243,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
         sdf.setTimeZone(TimeZone.getTimeZone("CET"));
         String ISO = sdf.format(date);
-        System.out.println(ISO);
         return ISO;
     }
 }

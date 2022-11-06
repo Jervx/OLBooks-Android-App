@@ -12,6 +12,7 @@ import android.widget.Button;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.itel316.olbooks.helpers.AuthHelper;
 import com.itel316.olbooks.helpers.DatabaseHelper;
+import com.itel316.olbooks.helpers.OlbookUtils;
 import com.itel316.olbooks.models.User;
 
 import java.util.Date;
@@ -41,12 +42,17 @@ public class MainActivity extends AppCompatActivity {
 
         dbhelper.checkTableExist();
 
+        // CREATE USER (dummy)
         dbhelper.insertUser("jsparagas1@gmail.com", "Jerbee", "Paragas", AuthHelper.hashPassword("helloworld"), 0, 0, new Date());
-        dbhelper.insertBook("jvprgmng.jpg","0000000001", "0000000000001", "Java Programming", "Joyce Farrell", "Coding<~>Programming<~>Java", "Discover the power of Java� for developing applications today when you trust the engaging, hands-on approach in Farrell's JAVA PROGRAMMING, 9E. Even if you're a first-time programmer, JAVA PROGRAMMING can show you how to quickly start developing useful programs, all while still mastering the basic principles of structured and object-oriented programming. Unique, reader-friendly explanations and meaningful programming exercises emphasize business applications and game creation while useful debugging exercises and contemporary case problems further expand your understanding. Additional digital learning resources within MindTap provide interactive learning tools as well as coding IDE (Integrated Development Environment) labs for practicing and expanding your skills.", User.toISODateString(new Date()), User.toISODateString(new Date()), "javajoyce.pdf", new Random().nextInt(40000), new Random().nextInt(40000));
-        dbhelper.insertBook("anmlwrld.jpg","0000000002", "0000000000002", "Animal World", "Jason Yu", "Animals<~>Nature<~>Forest<~>Sea", "Discover the wonders of nature that God gave us.", User.toISODateString(new Date()), User.toISODateString(new Date()), "AnimalWorld.pdf", new Random().nextInt(40000), new Random().nextInt(40000));
-//        dbhelper.insertBook("0000000003", "0000000000003", "Java Programming 3", "Joyce Farrell", "Coding<~>Programming<~>Java", "Discover the power of Java� for developing applications today when you trust the engaging, hands-on approach in Farrell's JAVA PROGRAMMING, 9E. Even if you're a first-time programmer, JAVA PROGRAMMING can show you how to quickly start developing useful programs, all while still mastering the basic principles of structured and object-oriented programming. Unique, reader-friendly explanations and meaningful programming exercises emphasize business applications and game creation while useful debugging exercises and contemporary case problems further expand your understanding. Additional digital learning resources within MindTap provide interactive learning tools as well as coding IDE (Integrated Development Environment) labs for practicing and expanding your skills.", User.toISODateString(new Date()), User.toISODateString(new Date()), "javajoyce.pdf", new Random().nextInt(40000), new Random().nextInt(40000));
-        dbhelper.insertToBookList(User.toISODateString(new Date()), 1, "0000000002", "0000000000002");
-        dbhelper.insertToBookList(User.toISODateString(new Date()), 1, "0000000002", "0000000000002");
+
+        // INSERT BOOK
+        dbhelper.insertBook("jvprgmng.jpg","0000000001", "0000000000001", "Java Programming", "Joyce Farrell", "Coding<~>Programming<~>Java", "Discover the power of Java� for developing applications today when you trust the engaging, hands-on approach in Farrell's JAVA PROGRAMMING, 9E. Even if you're a first-time programmer, JAVA PROGRAMMING can show you how to quickly start developing useful programs, all while still mastering the basic principles of structured and object-oriented programming. Unique, reader-friendly explanations and meaningful programming exercises emphasize business applications and game creation while useful debugging exercises and contemporary case problems further expand your understanding. Additional digital learning resources within MindTap provide interactive learning tools as well as coding IDE (Integrated Development Environment) labs for practicing and expanding your skills.", OlbookUtils.toISODateString(new Date()), OlbookUtils.toISODateString(new Date()), "javajoyce.pdf", new Random().nextInt(40000), new Random().nextInt(40000));
+        dbhelper.insertBook("anmlwrld.jpg","0000000002", "0000000000002", "Animal World", "Jason Yu", "Animals<~>Nature<~>Forest<~>Sea", "Discover the wonders of nature that God gave us.", OlbookUtils.toISODateString(new Date()), OlbookUtils.toISODateString(new Date()), "AnimalWorld.pdf", new Random().nextInt(40000), new Random().nextInt(40000));
+
+
+        // ADD BOOK TO USER BOOKLIST
+        dbhelper.insertToBookList(OlbookUtils.toISODateString(new Date()), 1, "0000000002", "0000000000002");
+        dbhelper.insertToBookList(OlbookUtils.toISODateString(new Date()), 1, "0000000002", "0000000000002");
 
         Cursor result = dbhelper.getUser("select * from user where isLoggedIn = 1", null);
 

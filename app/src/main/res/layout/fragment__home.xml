@@ -34,13 +34,15 @@
         app:layout_constraintTop_toBottomOf="@+id/textView_greet" />
 
     <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/book_viewpage"
-        android:layout_width="414dp"
-        android:layout_height="414dp"
+        android:id="@+id/viewpager_swipe"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview_tags">
 
     </androidx.viewpager2.widget.ViewPager2>
 
@@ -50,7 +52,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
-        android:text="Tags"
+        android:drawableRight="@drawable/ic_tag"
+        android:fontFamily="@font/inter"
+        android:text="Tags "
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_greet2" />
 
@@ -58,11 +62,11 @@
         android:id="@+id/textview_tags"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
-        android:fontFamily="@font/inter_semibold"
-        app:layout_constraintStart_toEndOf="@+id/textview_TAG"
-        app:layout_constraintTop_toBottomOf="@+id/textView_greet2" />
+        android:fontFamily="@font/inter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chip_container" />
 
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/chip_container"
