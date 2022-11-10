@@ -16,6 +16,10 @@ public class BookList implements Serializable {
         loadBooks(userId, dbHelper);
     }
 
+    public Book[] getBooks() {
+        return books;
+    }
+
     public void loadBooks(int userId, DatabaseHelper dbHelper) {
         Cursor myList = dbHelper.execRawQuery(String.format("SELECT B.photo, B.isbn_10, B.isbn_13, B.title, B.author , B.category, B.description, B.pubDate, B.dateAdded, B.pdfFile, B.save_count, B.like_count from booklist as BL INNER JOIN book as B on BL.isbn_10 = B.isbn_10 WHERE BL.userId=%d", userId), null);
 
@@ -40,6 +44,7 @@ public class BookList implements Serializable {
                     myList.getInt(10),
                     myList.getInt(11)
             );
+            System.out.println("LOADED : " + books[x].toString());
             x++;
         }
     }

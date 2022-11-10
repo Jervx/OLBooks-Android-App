@@ -1,5 +1,8 @@
 package com.itel316.olbooks.helpers;
 
+import com.itel316.olbooks.models.Book;
+import com.itel316.olbooks.models.User;
+
 import java.text.SimpleDateFormat;
 import java.time.ZonedDateTime;
 import java.util.Date;
@@ -40,4 +43,9 @@ public class OlbookUtils {
         return ret;
     }
 
+    public static boolean doesBookAdded(User user, Book book){
+        for(Book BOOK : user.bookList.getBooks())
+            if( BOOK.getIsbn_10().equals(book.getIsbn_10()) ) return true;
+        return false;
+    }
 }

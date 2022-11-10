@@ -52,6 +52,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return true;
     }
 
+    public boolean truncateDbs(SQLiteDatabase db, String[] dbNames) {
+        for (String dbName : dbNames)
+            db.execSQL(String.format("DELETE FROM %s", dbName));
+        return true;
+    }
+
     public Boolean insertUser(String email, String fname, String lname, String password, int isLoggedIn, int role, Date dateJoined) {
         try {
             SQLiteDatabase db = this.getWritableDatabase();
@@ -200,13 +206,49 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return books;
     }
 
+    public Book [] getBooksBySearch(String search){
+
+        String likes = "";
+
+        String fields = "title like '%%<~>%%' or category like '%%<~>%%' or author like '%%<~>%%'";
+        likes += fields.replaceAll("<~>", search);
+
+        String prepared = String.format("SELECT * FROM book where %s", likes);
+
+        Cursor bookResult = execRawQuery(prepared, null);
+        Book [] books = new Book[bookResult.getCount()];
+
+        int x = 0;
+        while (bookResult.moveToNext()) {
+            books[x] = new Book(
+                    bookResult.getString(0),
+                    bookResult.getString(1),
+                    bookResult.getString(2),
+                    bookResult.getString(3),
+                    bookResult.getString(4),
+                    bookResult.getString(5),
+                    bookResult.getString(6),
+                    bookResult.getString(7),
+                    bookResult.getString(8),
+                    bookResult.getString(9),
+                    bookResult.getInt(10),
+                    bookResult.getInt(11)
+            );
+            x++;
+        }
+
+        return books;
+    }
+
 
     // BOOKLIST
     //dateAdded, userId, isbn_10, isbn_13
-    public Boolean insertToBookList(String dateAdded, int userId, String isbn_10, String isbn_13) {
+    public Boolean insertToBookList(int newValue, String dateAdded, int userId, String isbn_10, String isbn_13) {
         try {
-            SQLiteDatabase db = this.getWritableDatabase();
+            this.getWritableDatabase().execSQL(String.format("UPDATE book set save_count=%d where isbn_10='%s'", newValue,isbn_10));
 
+            System.out.printf("Added %s to booklist for user %d\n", isbn_10,userId);
+            SQLiteDatabase db = this.getWritableDatabase();
             Cursor foundBook = getUser(String.format("SELECT * FROM booklist WHERE userId='%d' AND isbn_10='%s' AND isbn_13='%s';", userId, isbn_10, isbn_13), null);
 
             if (foundBook.getCount() > 0) {
@@ -227,6 +269,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         } catch (Exception e) {
         }
         return false;
+    }
+
+    public Boolean removeFromBookList(int newValue, int userId, String isbn_10){
+        System.out.printf("Remove %s from booklist for user %d\n", isbn_10,userId);
+        this.getWritableDatabase().execSQL(String.format("DELETE FROM booklist where isbn_10='%s' and userId=%d", isbn_10, userId));
+        this.getWritableDatabase().execSQL(String.format("UPDATE book set save_count=%d where isbn_10='%s'", newValue,isbn_10));
+        return true;
+    }
+
+    public Boolean likeBook( int newValue, String isbn_10){
+        System.out.printf("Liked %s from booklist for user\n", isbn_10);
+        this.getWritableDatabase().execSQL(String.format("UPDATE book set like_count=%d where isbn_10='%s'", newValue,isbn_10));
+        return true;
     }
 
     public Cursor execRawQuery(String query, String[] args) {

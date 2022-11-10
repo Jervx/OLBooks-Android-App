@@ -22,7 +22,7 @@ public class User implements Serializable {
     private int role;
     private int isLoggedIn;
     private Date dateJoined;
-    private BookList bookList;
+    public BookList bookList;
 
     public User(String email, DatabaseHelper dbHelper) {
         this.email = email;

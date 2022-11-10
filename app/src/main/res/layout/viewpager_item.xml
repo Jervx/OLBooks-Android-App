@@ -41,7 +41,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/book_title"
+                    android:id="@+id/book_desc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="28dp"
@@ -65,20 +65,19 @@
                     android:text="desc"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/book_title" />
+                    app:layout_constraintTop_toBottomOf="@+id/book_desc" />
 
                 <TextView
                     android:id="@+id/book_likes"
                     android:layout_width="wrap_content"
                     android:layout_height="19dp"
-                    android:layout_marginTop="36dp"
                     android:layout_marginEnd="20dp"
                     android:drawableRight="@drawable/ic_heart"
                     android:fontFamily="@font/inter_semibold"
                     android:text=""
                     android:textAlignment="textEnd"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/book_image" />
+                    app:layout_constraintTop_toBottomOf="@+id/book_desc" />
 
                 <TextView
                     android:id="@+id/book_saves"

@@ -1,5 +1,9 @@
 package com.itel316.olbooks.models;
 
+import android.database.Cursor;
+
+import com.itel316.olbooks.helpers.DatabaseHelper;
+
 import java.io.Serializable;
 
 public class Book implements Serializable {
@@ -24,6 +28,26 @@ public class Book implements Serializable {
 
     public String getPhoto() {
         return photo;
+    }
+
+    public void fetchSelf(DatabaseHelper dbHelper){
+        Cursor myList = dbHelper.execRawQuery(String.format("SELECT B.photo, B.isbn_10, B.isbn_13, B.title, B.author , B.category, B.description, B.pubDate, B.dateAdded, B.pdfFile, B.save_count, B.like_count from book as B WHERE B.isbn_10='%s'", this.getIsbn_10()), null);
+
+        while (myList.moveToNext()) {
+            this.photo = myList.getString(0);
+            this.isbn_10 = myList.getString(1);
+            this.isbn_13 = myList.getString(2);
+            this.title = myList.getString(3);
+            this.author = myList.getString(4);
+            this.category = myList.getString(5);
+            this.description = myList.getString(6);
+            this.pubDate = myList.getString(7);
+            this.dateAdded = myList.getString(8);
+            this.pdfFile = myList.getString(9);
+            this.save_count = myList.getInt(10);
+            this.like_count = myList.getInt(11);
+            System.out.println("FOUND "+this.toString());
+        }
     }
 
     public void setPhoto(String photo) {

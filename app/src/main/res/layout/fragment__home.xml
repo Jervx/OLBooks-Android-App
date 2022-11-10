@@ -56,7 +56,7 @@
         android:fontFamily="@font/inter"
         android:text="Tags "
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_greet2" />
+        app:layout_constraintTop_toBottomOf="@+id/search_field" />
 
     <TextView
         android:id="@+id/textview_tags"
@@ -84,14 +84,28 @@
     <Button
         android:id="@+id/btn_add_filter"
         style="?attr/materialButtonOutlinedStyle"
-        android:layout_width="58dp"
-        android:layout_height="30dp"
+        android:layout_width="61dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
         android:drawableLeft="@drawable/ic_baseline_add_24"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_greet2"
+        app:layout_constraintStart_toEndOf="@+id/textview_TAG"
+        app:layout_constraintTop_toBottomOf="@+id/search_field"
         app:strokeColor="@color/transparent" />
+
+    <EditText
+        android:id="@+id/search_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="14dp"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:drawableRight="@drawable/ic_search"
+        android:fontFamily="@font/inter"
+        android:hint="Search Book"
+        android:inputType="textPersonName"
+        app:layout_constraintTop_toBottomOf="@+id/textView_greet2"
+        tools:layout_editor_absoluteX="24dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
