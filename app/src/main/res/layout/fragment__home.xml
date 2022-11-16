@@ -1,111 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/Bg"
     android:layout_height="match_parent"
     tools:context=".Fragment_Home">
 
-    <TextView
-        android:id="@+id/textView_greet"
-        android:layout_width="154dp"
-        android:layout_height="27dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="36dp"
-        android:fontFamily="@font/inter"
-        android:text="Hey User"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@color/CoffeeBlack_900"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView_greet2"
-        android:layout_width="358dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="4dp"
-        android:fontFamily="@font/inter_semibold"
-        android:text="Let's Start Reading"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:textColor="@color/CoffeeBlack_900"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_greet" />
-
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/viewpager_swipe"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="18dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textview_tags">
-
-    </androidx.viewpager2.widget.ViewPager2>
-
-    <TextView
-        android:id="@+id/textview_TAG"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:drawableRight="@drawable/ic_tag"
-        android:fontFamily="@font/inter"
-        android:text="Tags "
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_field" />
-
-    <TextView
-        android:id="@+id/textview_tags"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/inter"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chip_container" />
-
-    <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chip_container"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textview_TAG">
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/textView_greet"
+            android:layout_width="154dp"
+            android:layout_height="27dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="28dp"
+            android:fontFamily="@font/inter"
+            android:text="Hey User"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/CoffeeBlack_900"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView_greet2"
+            android:layout_width="358dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/inter_semibold"
+            android:text="Let's Start Reading"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="@color/CoffeeBlack_900"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_greet" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewpager_swipe"
+            android:layout_width="match_parent"
+            android:layout_height="600dp"
+            android:layout_marginVertical="18dp"
+            android:paddingStart="34dp"
+            android:background="@color/transparent"
+            android:paddingEnd="50dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textview_tags">
+
+        </androidx.viewpager2.widget.ViewPager2>
+
+        <TextView
+            android:id="@+id/textview_tags"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/inter"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/chip_container" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chip_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_add_filter">
 
 
-    </com.google.android.material.chip.ChipGroup>
+        </com.google.android.material.chip.ChipGroup>
 
-    <Button
-        android:id="@+id/btn_add_filter"
-        style="?attr/materialButtonOutlinedStyle"
-        android:layout_width="61dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:drawableLeft="@drawable/ic_baseline_add_24"
-        app:layout_constraintStart_toEndOf="@+id/textview_TAG"
-        app:layout_constraintTop_toBottomOf="@+id/search_field"
-        app:strokeColor="@color/transparent" />
+        <EditText
+            android:id="@+id/search_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="14dp"
+            android:layout_marginTop="8dp"
+            android:drawableRight="@drawable/ic_search"
+            android:ems="10"
+            android:fontFamily="@font/inter"
+            android:hint="Search Book"
+            android:inputType="textPersonName"
+            app:layout_constraintTop_toBottomOf="@+id/textView_greet2"
+            tools:layout_editor_absoluteX="14dp" />
 
-    <EditText
-        android:id="@+id/search_field"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="14dp"
-        android:layout_marginTop="24dp"
-        android:ems="10"
-        android:drawableRight="@drawable/ic_search"
-        android:fontFamily="@font/inter"
-        android:hint="Search Book"
-        android:inputType="textPersonName"
-        app:layout_constraintTop_toBottomOf="@+id/textView_greet2"
-        tools:layout_editor_absoluteX="24dp" />
+        <com.google.android.material.chip.Chip
+            android:id="@+id/btn_add_filter"
+            android:layout_width="109dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:text="Add Filter"
+            android:textSize="14sp"
+            app:chipIcon="@drawable/ic_tag"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/search_field" />
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

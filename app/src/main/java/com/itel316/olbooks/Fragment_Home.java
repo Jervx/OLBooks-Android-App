@@ -1,5 +1,6 @@
 package com.itel316.olbooks;
 
+import android.app.Dialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.material.chip.Chip;
@@ -27,7 +29,7 @@ import com.itel316.olbooks.models.User;
 
 import java.util.ArrayList;
 
-public class Fragment_Home extends Fragment implements Dialog_Fragment_One_Input.DialogListener {
+public class Fragment_Home extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -115,29 +117,32 @@ public class Fragment_Home extends Fragment implements Dialog_Fragment_One_Input
     }
 
     public void openDialog() {
-        Dialog_Fragment_One_Input dialog_Fragment_one_input = new Dialog_Fragment_One_Input();
-        Bundle bund = new Bundle();
-        bund.putString("title", "Add Tag");
-        dialog_Fragment_one_input.setArguments(bund);
-        dialog_Fragment_one_input.setTargetFragment(Fragment_Home.this, 1);
-        dialog_Fragment_one_input.show(getParentFragmentManager(), "Add Tag");
-    }
+        Dialog tagDialog = new Dialog(getContext());
+        tagDialog.setContentView(R.layout.tagfilter);
+        ImageView close = (ImageView) tagDialog.findViewById(R.id.close);
+        Button btn_add_filter = (Button) tagDialog.findViewById(R.id.btn_add_filter);
 
-    @Override
-    public void applyTexts(String fieldOne) {
-        Chip tag_chip = new Chip(getActivity());
-        tag_chip.setText(fieldOne);
-        tag_chip.setCloseIconVisible(true);
-        tag_chip.setTextColor(getResources().getColor(R.color.CoffeeBlack_900));
+        close.setOnClickListener(e -> { tagDialog.dismiss(); });
 
-        tag_chip.setOnCloseIconClickListener(e -> {
-            category_tags.remove(tag_chip);
+        btn_add_filter.setOnClickListener(e -> {
+            Chip tag_chip = new Chip(getActivity());
+            tag_chip.setText(((EditText)tagDialog.findViewById(R.id.taginput)).getText().toString());
+            tag_chip.setCloseIconVisible(true);
+            tag_chip.setTextColor(getResources().getColor(R.color.CoffeeBlack_900));
+
+            tag_chip.setOnCloseIconClickListener(ev -> {
+                category_tags.remove(tag_chip);
+                updateChipContainer();
+            });
+
+            category_tags.add(tag_chip);
             updateChipContainer();
+            tagDialog.dismiss();
         });
 
-        category_tags.add(tag_chip);
-        updateChipContainer();
+        tagDialog.show();
     }
+
 
     public void updateChipContainer() {
         chipContainer.removeAllViews();
@@ -148,11 +153,15 @@ public class Fragment_Home extends Fragment implements Dialog_Fragment_One_Input
     }
 
     public void loadBooks() {
-        String chosenTags[] = new String[category_tags.size() + 1];
-        chosenTags[0] = searchField.getText().toString();
-        int counter = 1;
+        int additional = searchField.getText().toString().length() > 0 ? 1 : 0;
+        String chosenTags[] = new String[category_tags.size() + additional];
+
+        if(additional == 1)  chosenTags[chosenTags.length - 1] = searchField.getText().toString();
+
+        int counter = 0;
         for (Chip chp : category_tags) {
             chosenTags[counter] = (String) chp.getText();
+            counter++;
         }
 
         books = dbHelper.getBooksByTag(chosenTags);
@@ -163,7 +172,7 @@ public class Fragment_Home extends Fragment implements Dialog_Fragment_One_Input
         }
 
         textview_tags.setText(String.format("%d book found", books.length));
-        greets.setText("Hi "+curUser.getFname());
+        greets.setText("Hi " + curUser.getFname());
         renderViewPager();
     }
 
@@ -173,7 +182,7 @@ public class Fragment_Home extends Fragment implements Dialog_Fragment_One_Input
         swipe_view.setAdapter(vpAdapter);
         swipe_view.setClipToPadding(false);
         swipe_view.setClipChildren(false);
-        swipe_view.setOffscreenPageLimit(3);
+        swipe_view.setOffscreenPageLimit(2);
         swipe_view.getChildAt(0).setOverScrollMode(RecyclerView.OVER_SCROLL_NEVER);
 
         CompositePageTransformer comptrans = new CompositePageTransformer();

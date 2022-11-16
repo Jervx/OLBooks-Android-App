@@ -1,5 +1,8 @@
 package com.itel316.olbooks;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,6 +10,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -17,6 +22,8 @@ import com.itel316.olbooks.models.User;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import jp.wasabeef.blurry.Blurry;
 
 public class Fragment_BookInfo extends Fragment {
 
@@ -29,6 +36,8 @@ public class Fragment_BookInfo extends Fragment {
     private DatabaseHelper dbHelper;
     private User curUser;
     private Book curBook;
+
+    private ImageView cover_blur;
 
     public Fragment_BookInfo() {
 
@@ -60,6 +69,18 @@ public class Fragment_BookInfo extends Fragment {
         curUser = (User) getArguments().getSerializable("curUser");
         curBook = (Book) getArguments().getSerializable("curBook");
 
+        cover_blur = (ImageView) view.findViewById(R.id.cover_blur);
+
+        int resId = getContext().getResources().getIdentifier(String.format("drawable/%s", curBook.getPhoto()), null, getContext().getPackageName());
+        cover_blur.setImageResource(resId);
+
+        Button btn_startRead = view.findViewById(R.id.btn_startRead);
+
+        Bitmap bm=((BitmapDrawable)cover_blur.getDrawable()).getBitmap();
+        Blurry.with(getContext()).from(bm).into(cover_blur);
+
+        ((ImageView) view.findViewById(R.id.cover)).setImageResource(resId);
+
         rerender(view);
 
         TextView book_saves_btnText = view.findViewById(R.id.book_saves_btnText);
@@ -88,6 +109,12 @@ public class Fragment_BookInfo extends Fragment {
             }
             snackbar.show();
             rerender(view);
+        });
+
+        btn_startRead.setOnClickListener(ev -> {
+            Intent read = new Intent(getContext(), pdfreader.class);
+            read.putExtra("pdf", curBook.getPdfFile());
+            startActivity(read);
         });
         return view;
     }

@@ -1,6 +1,8 @@
 package com.itel316.olbooks;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,6 +23,8 @@ import com.itel316.olbooks.models.User;
 
 import java.util.ArrayList;
 import java.util.Date;
+
+import jp.wasabeef.blurry.Blurry;
 
 public class VPAdapter extends RecyclerView.Adapter<VPAdapter.ViewHolder> {
 
@@ -74,26 +79,26 @@ public class VPAdapter extends RecyclerView.Adapter<VPAdapter.ViewHolder> {
         });
 
         holder.bookLikes.setOnClickListener(e->{
-            Snackbar snackbar;
-            snackbar = Snackbar.make( parentView,"You liked this book!",Snackbar.LENGTH_SHORT);
+            Toast toasty;
+            toasty = Toast.makeText( rootActivity,"You liked this book!", Toast.LENGTH_SHORT);
             dbHelper.likeBook(viewPagerItem.getBook().getLikes() + 1, viewPagerItem.getBook().getIsbn_10());
-            snackbar.show();
+            toasty.show();
             viewPagerItem.getBook().fetchSelf(dbHelper);
             rerender(holder, viewPagerItem);
         });
 
         holder.bookSaved.setOnClickListener(e->{
-            Snackbar snackbar;
+            Toast toasty;
             if(OlbookUtils.doesBookAdded(curUser, viewPagerItem.getBook())) {
-                snackbar = Snackbar.make( parentView,"Removed from your saved books!",Snackbar.LENGTH_SHORT);
+                toasty = Toast.makeText( rootActivity,"Removed From Saved Books", Toast.LENGTH_SHORT);
                 dbHelper.removeFromBookList(viewPagerItem.getBook().getSave() - 1, curUser.getUserId(), viewPagerItem.getBook().getIsbn_10());
             }else{
-                snackbar = Snackbar.make( parentView,"Added to your saved books.",Snackbar.LENGTH_SHORT);
+                toasty = Toast.makeText( rootActivity,"You liked this book!", Toast.LENGTH_SHORT);
                 dbHelper.insertToBookList(viewPagerItem.getBook().getSave() + 1, OlbookUtils.toISODateString(new Date()), curUser.getUserId(), viewPagerItem.getBook().getIsbn_10(), viewPagerItem.getBook().getIsbn_13());
             }
             curUser.fetchSelf(dbHelper);
             viewPagerItem.getBook().fetchSelf(dbHelper);
-            snackbar.show();
+            toasty.show();
             rerender(holder, viewPagerItem);
         });
     }

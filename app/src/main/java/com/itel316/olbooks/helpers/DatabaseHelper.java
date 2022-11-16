@@ -169,10 +169,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Book [] getBooksByTag(String [] tags){
 
         String likes = "";
-
+        System.out.println(likes);
         int counter = 0;
         for(String tag : tags){
-            String fields = "title like '%%<~>%%' or category like '%%<~>%%' or author like '%%<~>%%'";
+            System.out.println(tag);
+            if(tag == null) break;
+            String fields = "title like '%<~>%' or category like '%<~>%' or author like '%<~>%'";
             likes += fields.replaceAll("<~>", tag);
             if(counter != tags.length - 1) likes += " or ";
             counter ++;
@@ -181,7 +183,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String prepared = "SELECT * FROM book";
 
         if(tags.length > 0) prepared = String.format("SELECT * FROM book where %s", likes);
-
+        System.out.println("PREP : "+ prepared);
         Cursor bookResult = execRawQuery(prepared, null);
         Book [] books = new Book[bookResult.getCount()];
 
@@ -211,7 +213,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         String likes = "";
 
-        String fields = "title like '%%<~>%%' or category like '%%<~>%%' or author like '%%<~>%%'";
+        String fields = "title like '%<~>%%' or category like '%<~>%' or author like '%<~>%'";
         likes += fields.replaceAll("<~>", search);
 
         String prepared = String.format("SELECT * FROM book where %s", likes);
