@@ -24,7 +24,7 @@
             android:scaleType="centerCrop"
             android:textColor="@color/CoffeeBlack_900"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/logo" />
@@ -36,12 +36,12 @@
             android:layout_marginTop="8dp"
             android:fontFamily="@font/inter_semibold"
             android:text="Sign Up"
-            android:textAlignment="viewStart"
+            android:textAlignment="center"
             android:textColor="@color/CoffeeBlack_900"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.316"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
@@ -52,9 +52,10 @@
             android:layout_marginTop="8dp"
             android:elegantTextHeight="true"
             android:text="By signing up, you will be able to access books you like."
+            android:textAlignment="center"
             android:textColor="@color/CoffeeBlack_700"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.305"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -68,11 +69,11 @@
             android:drawablePadding="8dp"
             android:hint="Email"
             android:inputType="textEmailAddress"
-            android:textColor="@color/Bg"
+            android:textColor="@color/CoffeeBlack_900"
             android:textColorHint="@color/CoffeeBlack_700"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.605"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
@@ -90,7 +91,7 @@
             android:textColorHint="@color/CoffeeBlack_700"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.605"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/email" />
 
@@ -108,7 +109,7 @@
             android:textColorHint="@color/CoffeeBlack_700"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.605"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/name" />
 
@@ -127,7 +128,7 @@
             android:textColorHint="@color/CoffeeBlack_700"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.605"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lastname" />
 
@@ -146,20 +147,20 @@
             android:textColorHint="@color/CoffeeBlack_700"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.605"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/password" />
 
         <Button
-            android:id="@+id/btn_sign_in"
+            android:id="@+id/btn_sign_up"
             android:layout_width="182dp"
             android:layout_height="46dp"
             android:layout_marginTop="28dp"
+            android:backgroundTint="@color/CoffeeBlack_900"
             android:text="Sign Up"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            android:backgroundTint="@color/CoffeeBlack_900"
             app:layout_constraintTop_toBottomOf="@+id/re_password" />
 
         <TextView
@@ -170,9 +171,9 @@
             android:text="Already have an account? sign in instead."
             android:textColor="@color/CoffeeBlack_900"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_sign_in" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_sign_up" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

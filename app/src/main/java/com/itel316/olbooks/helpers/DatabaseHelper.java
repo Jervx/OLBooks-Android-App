@@ -30,7 +30,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public void checkTableExist() {
         SQLiteDatabase db = this.getWritableDatabase();
-        String checkUserTable = "CREATE TABLE IF NOT EXISTS user ( userId INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT, fname TEXT, lname TEXT, password TEXT, role TEXT, isLoggedIn INTEGER, datejoined TEXT );";
+        String checkUserTable = "CREATE TABLE IF NOT EXISTS user ( userId INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT, fname TEXT, lname TEXT, password TEXT, role TEXT, isLoggedIn INTEGER, datejoined TEXT, liked TEXT );";
         String checkBookTable = "CREATE TABLE IF NOT EXISTS book ( photo TEXT, ISBN_10 TEXT PRIMARY KEY, ISBN_13 TEXT, title TEXT, author TEXT, category TEXT, description TEXT, pubDate TEXT, dateAdded TEXT, pdfFile TEXT, save_count INTEGER, like_count INTEGER);";
         String checkBookList = "CREATE TABLE IF NOT EXISTS booklist ( bookListId INTEGER PRIMARY KEY AUTOINCREMENT, dateAdded TEXT, userId INTEGER, isbn_10 TEXT, isbn_13 TEXT );";
         String checkRecover = "CREATE TABLE IF NOT EXISTS recovery( recoveryId INTEGER PRIMARY KEY AUTOINCREMENT, requestDate TEXT, userId INTEGER );";
@@ -76,6 +76,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             values.put("role", role);
             values.put("isLoggedIn", isLoggedIn);
             values.put("dateJoined", formatDateTime(dateJoined));
+            values.put("liked", "");
 
             db.insert("user", null, values);
 
@@ -91,7 +92,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             ContentValues values = new ContentValues();
             values.put("isLoggedIn",toState);
             db.update("user", values, "userId = "+userId, null);
-            Cursor users = db.rawQuery("SELECT * FROM user where userId = "+userId, null);
+//            Cursor users = db.rawQuery("SELECT * FROM user where userId = "+userId, null);
         } catch (Exception e) {
         }
     }
@@ -99,8 +100,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor getUser(String query, String[] args) {
         Cursor result = null;
         try {
-            result = this.getWritableDatabase().rawQuery(query, args);
-        } catch (Exception e) { }
+            result = execRawQuery(query, args);
+        } catch (Exception e) { System.out.println("ERR : "+e); }
         return result;
     }
 

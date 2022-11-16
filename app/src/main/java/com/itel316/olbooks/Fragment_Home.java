@@ -2,7 +2,11 @@ package com.itel316.olbooks;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.CompositePageTransformer;
+import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.text.Editable;
@@ -169,8 +173,20 @@ public class Fragment_Home extends Fragment implements Dialog_Fragment_One_Input
         swipe_view.setAdapter(vpAdapter);
         swipe_view.setClipToPadding(false);
         swipe_view.setClipChildren(false);
-        swipe_view.setOffscreenPageLimit(2);
-        swipe_view.getChildAt(0).setOverScrollMode(View.OVER_SCROLL_NEVER);
+        swipe_view.setOffscreenPageLimit(3);
+        swipe_view.getChildAt(0).setOverScrollMode(RecyclerView.OVER_SCROLL_NEVER);
+
+        CompositePageTransformer comptrans = new CompositePageTransformer();
+        comptrans.addTransformer(new MarginPageTransformer(40));
+        comptrans.addTransformer(new ViewPager2.PageTransformer() {
+            @Override
+            public void transformPage(@NonNull View page, float position) {
+                float r = 1 - Math.abs(position);
+                page.setScaleY(0.85f + r * 0.15f);
+            }
+        });
+
+        swipe_view.setPageTransformer(comptrans);
     }
 
 }

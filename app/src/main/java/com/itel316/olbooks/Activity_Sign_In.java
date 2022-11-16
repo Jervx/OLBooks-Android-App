@@ -31,7 +31,7 @@ public class Activity_Sign_In extends AppCompatActivity {
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
 
-        Button signIn = findViewById(R.id.btn_sign_in);
+        Button signIn = findViewById(R.id.btn_sign_up);
 
         signIn.setOnClickListener(e -> {
             String email_val = email.getText().toString();

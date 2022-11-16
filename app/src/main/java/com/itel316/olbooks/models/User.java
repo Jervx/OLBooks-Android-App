@@ -1,5 +1,6 @@
 package com.itel316.olbooks.models;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -13,7 +14,6 @@ import com.itel316.olbooks.helpers.*;
 import com.itel316.olbooks.helpers.DatabaseHelper;
 
 public class User implements Serializable {
-
     private int userId;
     private String email;
     private String fname;
@@ -23,10 +23,34 @@ public class User implements Serializable {
     private int isLoggedIn;
     private Date dateJoined;
     public BookList bookList;
+    private String Liked;
 
     public User(String email, DatabaseHelper dbHelper) {
         this.email = email;
         fetchSelf(dbHelper);
+    }
+
+    public void saveState(DatabaseHelper dbHelper) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        try {
+            ContentValues values = new ContentValues();
+            //fname TEXT, lname TEXT, password
+            values.put("fname", this.getFname());
+            values.put("lname", this.getLname());
+            values.put("password", this.getPassword());
+            values.put("liked", this.getLiked());
+            db.update("user", values, "userId = " + this.getUserId(), null);
+//            Cursor users = db.rawQuery("SELECT * FROM user where userId = "+userId, null);
+        } catch (Exception e) {
+        }
+    }
+
+    public String getLiked() {
+        return Liked;
+    }
+
+    public void setLiked(String liked) {
+        Liked = liked;
     }
 
     public void fetchSelf(DatabaseHelper dbhelper) {
@@ -38,6 +62,7 @@ public class User implements Serializable {
         setLname(findUser.getString(3));
         setPassword(findUser.getString(4));
         setIsLoggedIn(findUser.getInt(5));
+        setLiked(findUser.getString(6));
         this.bookList = getBookList(dbhelper);
     }
 
@@ -94,7 +119,7 @@ public class User implements Serializable {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = AuthHelper.hashPassword(password);
     }
 
     public void setRole(int role) {
