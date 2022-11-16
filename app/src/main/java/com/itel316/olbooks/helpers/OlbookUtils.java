@@ -10,6 +10,11 @@ import java.util.TimeZone;
 
 public class OlbookUtils {
 
+    public static final String EMAIL = "Set your from gmail here";
+
+    //This is your from email password
+    public static final String APPMAILPASS = "Set your from gmail password";
+
     public static String toISODateString(Date date) {
         SimpleDateFormat sdf;
         sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");

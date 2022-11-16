@@ -23,7 +23,7 @@
             android:justificationMode="inter_word"
             android:lineHeight="24dp"
             android:text="..."
-            android:textColor="@color/riverbed"
+            android:textColor="@color/CoffeeBlack_900"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.428"
@@ -39,7 +39,7 @@
             android:fontFamily="@font/inter_semibold"
             android:justificationMode="inter_word"
             android:text="..."
-            android:textColor="@color/riverbed"
+            android:textColor="@color/CoffeeBlack_900"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -64,7 +64,7 @@
             android:fontFamily="@font/inter_semibold"
             android:text="Description"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="@color/riverbed"
+            android:textColor="@color/CoffeeBlack_900"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_view_more_desc" />
 
@@ -87,7 +87,7 @@
                 android:fontFamily="@font/inter"
                 android:text="TextView"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:textColor="@color/riverbed" />
+                android:textColor="@color/CoffeeBlack_900" />
 
             <TextView
                 android:id="@+id/book_likes"

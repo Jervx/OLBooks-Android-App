@@ -124,7 +124,7 @@ public class Fragment_Home extends Fragment implements Dialog_Fragment_One_Input
         Chip tag_chip = new Chip(getActivity());
         tag_chip.setText(fieldOne);
         tag_chip.setCloseIconVisible(true);
-        tag_chip.setTextColor(getResources().getColor(R.color.riverbed));
+        tag_chip.setTextColor(getResources().getColor(R.color.CoffeeBlack_900));
 
         tag_chip.setOnCloseIconClickListener(e -> {
             category_tags.remove(tag_chip);

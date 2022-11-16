@@ -49,7 +49,7 @@
                     android:fontFamily="@font/inter_semibold"
                     android:text="Book Title"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                    android:textColor="@color/black"
+                    android:textColor="@color/CoffeeBlack_900"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
@@ -99,6 +99,7 @@
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginTop="28dp"
                     android:text="View Details"
+                    android:backgroundTint="@color/CoffeeBlack_900"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/book_author" />

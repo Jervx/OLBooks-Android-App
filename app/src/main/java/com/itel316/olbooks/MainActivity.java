@@ -23,8 +23,6 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button btn_sign_in, btn_sign_up;
-    private LinearProgressIndicator progress;
     final Handler handler = new Handler();
 
     @Override
@@ -33,12 +31,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
 
-        btn_sign_in = findViewById(R.id.btn_sign_in);
-        btn_sign_up = findViewById(R.id.btn_sign_up);
-        progress = findViewById(R.id.loader);
-
-        btn_sign_in.setVisibility(View.GONE);
-        btn_sign_up.setVisibility(View.GONE);
 
         DatabaseHelper dbhelper = new DatabaseHelper(getApplicationContext());
 //        dbhelper.dropDbs(dbhelper.getWritableDatabase(), new String[]{"book", "user", "booklist"});
@@ -73,23 +65,9 @@ public class MainActivity extends AppCompatActivity {
             }, 2000);
         else
             handler.postDelayed(() -> {
-                progress.setVisibility(View.GONE);
-                btn_sign_in.setVisibility(View.VISIBLE);
-                btn_sign_up.setVisibility(View.VISIBLE);
+                Intent SignInIntent = new Intent(getApplicationContext(), Activity_Sign_In.class);
+                startActivity(SignInIntent);
+                finish();
             }, 2000);
-
-
-        btn_sign_in.setOnClickListener(e -> {
-            Intent SignInIntent = new Intent(getApplicationContext(), Activity_Sign_In.class);
-            startActivity(SignInIntent);
-            finish();
-        });
-
-        btn_sign_up.setOnClickListener(e -> {
-            Intent signupIntent = new Intent(getApplicationContext(), Activity_Sign_Up.class);
-            startActivity(signupIntent);
-            finish();
-        });
-
     }
 }

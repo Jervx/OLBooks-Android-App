@@ -4,86 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg"
+    android:background="@color/Bg"
     tools:context=".MainActivity">
-
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="272dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/inter_semibold"
-        android:text="Read &amp; Discover books"
-        android:textAlignment="viewStart"
-        android:textColor="@color/white"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.316"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="141dp"
-        android:layout_height="133dp"
-        android:layout_marginTop="156dp"
+        android:layout_width="417dp"
+        android:layout_height="237dp"
         android:fontFamily="@font/inter_semibold"
         android:justificationMode="inter_word"
-        android:textColor="@color/white"
+        android:scaleType="centerCrop"
+        android:textColor="@color/Bg"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.162"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5"
         app:srcCompat="@drawable/logo" />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="266dp"
-        android:layout_height="72dp"
-        android:layout_marginTop="12dp"
-        android:elegantTextHeight="true"
-        android:text="OLBooks provide digital version of your favorite books. Access &amp; read anytime anywhere."
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.303"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
-
-    <com.google.android.material.button.MaterialButtonToggleGroup
-        android:id="@+id/toggleButton"
-        android:layout_width="263dp"
-        android:layout_height="52dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.297"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5">
-
-        <Button
-            android:id="@+id/btn_sign_in"
-            android:layout_width="111dp"
-            android:layout_height="wrap_content"
-            android:text="Sign In"
-            android:textSize="16sp" />
-
-        <Button
-            android:id="@+id/btn_sign_up"
-            android:layout_width="111dp"
-            android:layout_height="wrap_content"
-            android:text="Sign Up"
-            android:textSize="16sp" />
-
-    </com.google.android.material.button.MaterialButtonToggleGroup>
 
     <com.google.android.material.progressindicator.LinearProgressIndicator
         android:id="@+id/loader"
-        android:layout_width="230dp"
+        android:layout_width="24dp"
         android:layout_height="64dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="20dp"
         android:indeterminate="true"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.248"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
