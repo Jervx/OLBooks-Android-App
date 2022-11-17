@@ -24,10 +24,15 @@ public class User implements Serializable {
     private Date dateJoined;
     public BookList bookList;
     private String Liked;
+    private byte [] img;
 
     public User(String email, DatabaseHelper dbHelper) {
         this.email = email;
         fetchSelf(dbHelper);
+
+        if(img == null){
+
+        }
     }
 
     public void saveState(DatabaseHelper dbHelper) {

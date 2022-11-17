@@ -51,8 +51,8 @@ public class VPAdapter extends RecyclerView.Adapter<VPAdapter.ViewHolder> {
         holder.bookImage.setImageResource(R.drawable.logo);
         holder.bookTitle.setText(viewPagerItem.book.getTitle());
         holder.bookAuthor.setText("By "+viewPagerItem.book.getAuthor());
-        holder.bookLikes.setText(String.format("%s", OlbookUtils.shortenNumber(viewPagerItem.getBook().getLikes())));
-        holder.bookSaved.setText(String.format("%s", OlbookUtils.shortenNumber(viewPagerItem.getBook().getSave())));
+        holder.bookLikes.setText(String.format("%s ", OlbookUtils.shortenNumber(viewPagerItem.getBook().getLikes())));
+        holder.bookSaved.setText(String.format("%s ", OlbookUtils.shortenNumber(viewPagerItem.getBook().getSave())));
         Context context = rootActivity.getApplicationContext();
         int resId = context.getResources().getIdentifier(String.format("drawable/%s", viewPagerItem.getBook().getPhoto()), null, context.getPackageName());
         holder.bookImage.setImageResource(resId);

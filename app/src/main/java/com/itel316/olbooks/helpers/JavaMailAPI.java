@@ -43,7 +43,7 @@ public class JavaMailAPI extends AsyncTask<Void,Void,Void>  {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        Toast toast = Toast.makeText(mContext,"Sending Verification Code, please wait...",Toast.LENGTH_LONG);
+        Toast toast = Toast.makeText(mContext,"Sending Code, please wait...",Toast.LENGTH_LONG);
         toast.show();
 //        mProgressDialog = ProgressDialog.show(mContext,"Sending message", "Please wait...",false,false);
     }
@@ -52,7 +52,7 @@ public class JavaMailAPI extends AsyncTask<Void,Void,Void>  {
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
 //        mProgressDialog.dismiss();
-        Toast toast = Toast.makeText(mContext,"Verification Code sent to your email",Toast.LENGTH_LONG);
+        Toast toast = Toast.makeText(mContext,"Code sent to your email",Toast.LENGTH_LONG);
         toast.show();
     }
 

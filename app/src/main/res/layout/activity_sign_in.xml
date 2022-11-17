@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/Bg"
+    android:background="@drawable/bg"
     tools:context=".Activity_Sign_In">
 
     <TextView
@@ -12,7 +12,7 @@
         android:layout_width="272dp"
         android:layout_height="45dp"
         android:layout_marginTop="8dp"
-        android:fontFamily="@font/inter_semibold"
+        android:fontFamily="@font/gentium_book_basic_bold"
         android:text="Sign In to OLBooks"
         android:textAlignment="viewStart"
         android:textColor="@color/CoffeeBlack_900"
@@ -29,8 +29,10 @@
         android:layout_height="44dp"
         android:layout_marginTop="8dp"
         android:elegantTextHeight="true"
+        android:fontFamily="@font/gentium_book_basic"
         android:text="Sign In to your account &amp; start reading books."
         android:textColor="@color/CoffeeBlack_900"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.303"
         app:layout_constraintStart_toStartOf="parent"
@@ -64,7 +66,7 @@
         android:inputType="textPassword"
         android:textColor="@color/CoffeeBlack_900"
         android:textColorHint="@color/CoffeeBlack_700"
-        android:textSize="14sp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -82,7 +84,7 @@
         android:inputType="textEmailAddress"
         android:textColor="@color/CoffeeBlack_900"
         android:textColorHint="@color/CoffeeBlack_700"
-        android:textSize="14sp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -107,9 +109,22 @@
         android:layout_marginTop="32dp"
         android:text="Doesn't have an account? sign up now!"
         android:textColor="@color/CoffeeBlack_900"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_sign_up" />
+
+    <TextView
+        android:id="@+id/forgot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/gentium_book_basic"
+        android:text="forgot password"
+        android:textAlignment="viewEnd"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/password"
+        app:layout_constraintTop_toBottomOf="@+id/password" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

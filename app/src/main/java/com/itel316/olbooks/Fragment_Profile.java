@@ -1,9 +1,14 @@
 package com.itel316.olbooks;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -17,6 +22,10 @@ import com.itel316.olbooks.helpers.AuthHelper;
 import com.itel316.olbooks.helpers.DatabaseHelper;
 import com.itel316.olbooks.models.User;
 
+import java.io.ByteArrayOutputStream;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class Fragment_Profile extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
@@ -25,15 +34,14 @@ public class Fragment_Profile extends Fragment {
     private String mParam1;
     private String mParam2;
     private User curUser;
-    private Button save, discard, logout;
+    private Button save, discard, logout, change_profile;
     private EditText name, lastname, password;
 
     private String newName, newLastName, newPassword;
     private DatabaseHelper dbHelper;
+    private CircleImageView profile_image;
 
-    public Fragment_Profile() {
-
-    }
+    public Fragment_Profile() {  }
 
     public static Fragment_Profile newInstance(String param1, String param2) {
         Fragment_Profile fragment = new Fragment_Profile();
@@ -64,6 +72,7 @@ public class Fragment_Profile extends Fragment {
         logout = view.findViewById(R.id.logout);
         discard = view.findViewById(R.id.discard);
         save = view.findViewById(R.id.save);
+        change_profile = view.findViewById(R.id.change_profile);
 
         discard.setOnClickListener(e -> reInit());
         save.setOnClickListener(e -> saveChange());
@@ -71,6 +80,8 @@ public class Fragment_Profile extends Fragment {
         name = view.findViewById(R.id.name);
         lastname = view.findViewById(R.id.lastname);
         password = view.findViewById(R.id.password);
+
+        profile_image = view.findViewById(R.id.profile_image);
 
         name.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {
@@ -113,9 +124,18 @@ public class Fragment_Profile extends Fragment {
             getActivity().finishAffinity();
         });
 
+        change_profile.setOnClickListener(e -> {
+            captureImage();
+        });
+
         reInit();
         handleType();
         return view;
+    }
+
+    private void captureImage() {
+        Intent cameraIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
     }
 
     void handleType() {
@@ -162,8 +182,8 @@ public class Fragment_Profile extends Fragment {
 
         reInit();
 
-        save.setVisibility(8);
-        discard.setVisibility(8);
+        save.setVisibility(View.GONE);
+        discard.setVisibility(View.GONE);
 
         Toast.makeText(getContext(), "Changes Saved", Toast.LENGTH_LONG).show();
     }

@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -114,6 +116,27 @@ public class Activity_Home extends AppCompatActivity {
 
             binding.bottomNavigationView.getMenu().getItem(foc).setChecked(true);
         } else finish();
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        System.out.println("Fire "+ requestCode);
+        try {
+            switch (requestCode) {
+
+                case 1:
+                    if (resultCode == Activity.RESULT_OK) {
+                        System.out.println("OK ");
+                        //data gives you the image uri. Try to convert that to bitmap
+                        break;
+                    } else if (resultCode == Activity.RESULT_CANCELED) {
+
+                    }
+                    break;
+            }
+        } catch (Exception e) {
+            System.out.println("Fire ERR "+e);
+        }
     }
 
 }

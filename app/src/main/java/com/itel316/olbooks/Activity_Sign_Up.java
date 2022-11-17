@@ -100,6 +100,7 @@ public class Activity_Sign_Up extends AppCompatActivity {
             genKey = OlbookUtils.randomKey(6);
 
             String buildMsg = OlbookUtils.HTML_NewVerification.replace("${name}", i_name);
+            buildMsg = buildMsg.replace("${content}", "Thank you for signing up to OlBooks, to complete your sign up, here is your verification code.");
             buildMsg = buildMsg.replace("${verification}", genKey);
 
             JavaMailAPI javaMailAPI = new JavaMailAPI(this, i_email, "OLBook Verification", buildMsg);

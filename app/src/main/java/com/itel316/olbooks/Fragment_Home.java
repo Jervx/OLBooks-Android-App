@@ -25,7 +25,6 @@ import android.widget.TextView;
 
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
-import com.google.android.material.snackbar.Snackbar;
 import com.itel316.olbooks.helpers.DatabaseHelper;
 import com.itel316.olbooks.models.Book;
 import com.itel316.olbooks.models.User;
@@ -88,7 +87,7 @@ public class Fragment_Home extends Fragment {
 
         searchField = (EditText) view.findViewById(R.id.search_field);
         chipContainer = (ChipGroup) view.findViewById(R.id.chip_container);
-        btn_addCategoryTag = (ImageButton) view.findViewById(R.id.btn_add_filter);
+        btn_addCategoryTag = (ImageButton) view.findViewById(R.id.btn_send_new_pass);
         textview_tags = (TextView) view.findViewById(R.id.textview_tags);
         swipe_view = (ViewPager2) view.findViewById(R.id.viewpager_swipe);
         greets = (TextView) view.findViewById((R.id.textView_greet));
@@ -125,13 +124,13 @@ public class Fragment_Home extends Fragment {
         Dialog tagDialog = new Dialog(getContext());
         tagDialog.setContentView(R.layout.tagfilter);
         ImageView close = (ImageView) tagDialog.findViewById(R.id.close);
-        Button btn_add_filter = (Button) tagDialog.findViewById(R.id.btn_add_filter);
+        Button btn_add_filter = (Button) tagDialog.findViewById(R.id.btn_send_new_pass);
 
         close.setOnClickListener(e -> { tagDialog.dismiss(); });
 
         btn_add_filter.setOnClickListener(e -> {
             Chip tag_chip = new Chip(getActivity());
-            tag_chip.setText(((EditText)tagDialog.findViewById(R.id.taginput)).getText().toString());
+            tag_chip.setText(((EditText)tagDialog.findViewById(R.id.email_input)).getText().toString());
             tag_chip.setCloseIconVisible(true);
             tag_chip.setTextColor(getResources().getColor(R.color.Bg));
             tag_chip.setChipBackgroundColor(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.CoffeeBlack_700)));
