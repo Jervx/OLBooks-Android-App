@@ -13,7 +13,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        android:background="@color/Bg"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.cardview.widget.CardView
@@ -26,14 +25,13 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/Bg"
                 android:outlineAmbientShadowColor="@color/shad1"
                 android:outlineSpotShadowColor="@color/shad1"
                 tools:layout_editor_absoluteX="30dp"
                 tools:layout_editor_absoluteY="0dp">
 
                 <ImageView
-                    android:id="@+id/book_image"
+                    android:id="@+id/book_img"
                     android:layout_width="match_parent"
                     android:layout_height="450dp"
                     android:scaleType="centerCrop"
@@ -44,43 +42,47 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/book_desc"
+                    android:id="@+id/book_tit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/inter_semibold"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="40dp"
+                    android:fontFamily="@font/gentium_book_basic_bold"
                     android:text="Book Title"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                     android:textColor="@color/CoffeeBlack_900"
                     android:textSize="20sp"
                     android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/book_image" />
+                    app:layout_constraintTop_toBottomOf="@+id/book_img" />
 
                 <TextView
-                    android:id="@+id/book_author"
+                    android:id="@+id/book_auth"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
+                    android:layout_marginStart="20dp"
                     android:layout_marginTop="8dp"
-                    android:fontFamily="@font/inter_semibold"
+                    android:fontFamily="@font/gentium_book_basic"
                     android:text="desc"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/book_desc" />
+                    app:layout_constraintTop_toBottomOf="@+id/book_tit" />
 
                 <TextView
                     android:id="@+id/book_likes"
                     android:layout_width="wrap_content"
                     android:layout_height="19dp"
+                    android:layout_marginTop="16dp"
                     android:layout_marginEnd="4dp"
-                    android:drawableRight="@drawable/ic_heart"
-                    android:fontFamily="@font/inter_semibold"
+                    android:drawableRight="@drawable/ic_baseline_remove_red_eye_24"
+                    android:fontFamily="@font/gentium_book_basic"
                     android:text=""
                     android:textAlignment="textEnd"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/book_desc" />
+                    app:layout_constraintTop_toBottomOf="@+id/book_img" />
 
                 <TextView
                     android:id="@+id/book_saves"
@@ -89,24 +91,26 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="4dp"
                     android:drawableRight="@drawable/ic_bookmark"
-                    android:fontFamily="@font/inter_semibold"
+                    android:fontFamily="@font/gentium_book_basic"
                     android:text=""
                     android:textAlignment="textEnd"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/book_likes" />
 
                 <Button
-                    android:id="@+id/btn_view_details"
+                    android:id="@+id/readbtn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="20dp"
-                    android:layout_marginTop="28dp"
+                    android:layout_marginTop="20dp"
                     android:backgroundTint="@color/CoffeeBlack_900"
+                    android:fontFamily="@font/gentium_book_basic"
                     android:text="View Details"
+                    android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/book_author" />
+                    app:layout_constraintHorizontal_bias="0.6"
+                    app:layout_constraintStart_toStartOf="@+id/book_auth"
+                    app:layout_constraintTop_toBottomOf="@+id/book_auth" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

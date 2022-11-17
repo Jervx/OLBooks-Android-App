@@ -1,9 +1,11 @@
 package com.itel316.olbooks;
 
 import android.app.Dialog;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.CompositePageTransformer;
@@ -17,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -43,12 +46,13 @@ public class Fragment_Home extends Fragment {
     private Book books[];
 
     private ChipGroup chipContainer;
-    private Button btn_addCategoryTag;
+    private ImageButton btn_addCategoryTag;
     private ViewGroup container;
     private TextView textview_tags, greets;
     private ViewPager2 swipe_view;
     private EditText searchField;
     private View parentView;
+    private ImageView nofound;
 
     ArrayList<ViewPagerItem> viewPagerItemArrayList;
 
@@ -84,13 +88,14 @@ public class Fragment_Home extends Fragment {
 
         searchField = (EditText) view.findViewById(R.id.search_field);
         chipContainer = (ChipGroup) view.findViewById(R.id.chip_container);
-        btn_addCategoryTag = (Button) view.findViewById(R.id.btn_add_filter);
+        btn_addCategoryTag = (ImageButton) view.findViewById(R.id.btn_add_filter);
         textview_tags = (TextView) view.findViewById(R.id.textview_tags);
         swipe_view = (ViewPager2) view.findViewById(R.id.viewpager_swipe);
         greets = (TextView) view.findViewById((R.id.textView_greet));
         viewPagerItemArrayList = new ArrayList<>();
 
         parentView = getActivity().findViewById(R.id.frame_fragment);
+        nofound = view.findViewById(R.id.nofound);
 
         btn_addCategoryTag.setOnClickListener(e -> {
             openDialog();
@@ -128,7 +133,8 @@ public class Fragment_Home extends Fragment {
             Chip tag_chip = new Chip(getActivity());
             tag_chip.setText(((EditText)tagDialog.findViewById(R.id.taginput)).getText().toString());
             tag_chip.setCloseIconVisible(true);
-            tag_chip.setTextColor(getResources().getColor(R.color.CoffeeBlack_900));
+            tag_chip.setTextColor(getResources().getColor(R.color.Bg));
+            tag_chip.setChipBackgroundColor(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.CoffeeBlack_700)));
 
             tag_chip.setOnCloseIconClickListener(ev -> {
                 category_tags.remove(tag_chip);
@@ -171,8 +177,11 @@ public class Fragment_Home extends Fragment {
             viewPagerItemArrayList.add(viewPagerItem);
         }
 
+
         textview_tags.setText(String.format("%d book found", books.length));
         greets.setText("Hi " + curUser.getFname());
+        if(books.length == 0) nofound.setVisibility(View.VISIBLE);
+        else nofound.setVisibility(View.GONE);
         renderViewPager();
     }
 

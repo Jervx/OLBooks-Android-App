@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.itel316.olbooks.helpers.DatabaseHelper;
@@ -38,6 +39,7 @@ public class Fragment_BookInfo extends Fragment {
     private Book curBook;
 
     private ImageView cover_blur;
+    private Button book_saves_btnText, btn_startRead;
 
     public Fragment_BookInfo() {
 
@@ -74,19 +76,19 @@ public class Fragment_BookInfo extends Fragment {
         int resId = getContext().getResources().getIdentifier(String.format("drawable/%s", curBook.getPhoto()), null, getContext().getPackageName());
         cover_blur.setImageResource(resId);
 
-        Button btn_startRead = view.findViewById(R.id.btn_startRead);
+        btn_startRead = view.findViewById(R.id.btn_startRead);
 
         Bitmap bm=((BitmapDrawable)cover_blur.getDrawable()).getBitmap();
         Blurry.with(getContext()).from(bm).into(cover_blur);
 
         ((ImageView) view.findViewById(R.id.cover)).setImageResource(resId);
 
+        book_saves_btnText = view.findViewById(R.id.book_saves_btnText);
+        TextView book_likes = view.findViewById(R.id.book_likes);
+
         rerender(view);
 
-        TextView book_saves_btnText = view.findViewById(R.id.book_saves_btnText);
-        TextView book_likes_btnText = view.findViewById(R.id.book_likes_btnText);
-
-        book_likes_btnText.setOnClickListener(e->{
+        book_likes.setOnClickListener(e->{
             Snackbar snackbar;
             dbHelper.likeBook(curBook.getLikes() + 1, curBook.getIsbn_10());
             snackbar = Snackbar.make( view,"You liked this book!",Snackbar.LENGTH_SHORT);
@@ -97,7 +99,6 @@ public class Fragment_BookInfo extends Fragment {
 
         book_saves_btnText.setOnClickListener(e->{
             Snackbar snackbar;
-            curUser.fetchSelf(dbHelper);
             if(OlbookUtils.doesBookAdded(curUser, curBook)) {
                 snackbar = Snackbar.make( view,"Removed from your saved books!",Snackbar.LENGTH_SHORT);
                 dbHelper.removeFromBookList(curBook.getSave()-1 ,curUser.getUserId(), curBook.getIsbn_10());
@@ -107,13 +108,17 @@ public class Fragment_BookInfo extends Fragment {
                 dbHelper.insertToBookList( curBook.getSave() + 1,OlbookUtils.toISODateString(new Date()), curUser.getUserId(), curBook.getIsbn_10(), curBook.getIsbn_13());
                 curBook.fetchSelf(dbHelper);
             }
+            curUser.fetchSelf(dbHelper);
             snackbar.show();
             rerender(view);
         });
 
         btn_startRead.setOnClickListener(ev -> {
+            dbHelper.likeBook(curBook.getLikes() + 1, curBook.getIsbn_10());
+
             Intent read = new Intent(getContext(), pdfreader.class);
             read.putExtra("pdf", curBook.getPdfFile());
+            read.putExtra("book", curBook);
             startActivity(read);
         });
         return view;
@@ -126,7 +131,13 @@ public class Fragment_BookInfo extends Fragment {
         ((TextView) view.findViewById(R.id.book_likes)).setText(OlbookUtils.shortenNumber(curBook.getLikes()));
         ((TextView) view.findViewById(R.id.book_saves)).setText(OlbookUtils.shortenNumber(curBook.getSave()));
 
-        ((TextView) view.findViewById(R.id.book_desc)).setText("\t\t" + curBook.getDescription().replaceAll("<~>", "\n\n\t"));
+        ((TextView) view.findViewById(R.id.book_tit)).setText("\t\t" + curBook.getDescription().replaceAll("<~>", "\n\n\t"));
+
+        if(OlbookUtils.doesBookAdded(curUser, curBook)) {
+            book_saves_btnText.setText("Unsave");
+        }else{
+            book_saves_btnText.setText("Save");
+        }
     }
 
 }

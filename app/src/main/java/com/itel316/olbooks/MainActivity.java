@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         DatabaseHelper dbhelper = new DatabaseHelper(getApplicationContext());
 //        dbhelper.dropDbs(dbhelper.getWritableDatabase(), new String[]{""});
-//        dbhelper.truncateDbs(dbhelper.getWritableDatabase(), new String[]{"book"});
+//        dbhelper.truncateDbs(dbhelper.getWritableDatabase(), new String[]{"user"});
 
         dbhelper.checkTableExist();
 

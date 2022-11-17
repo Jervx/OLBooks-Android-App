@@ -7,6 +7,7 @@ import android.os.Bundle;
 import com.github.barteksc.pdfviewer.PDFView;
 import com.github.barteksc.pdfviewer.link.DefaultLinkHandler;
 import com.github.barteksc.pdfviewer.util.FitPolicy;
+import com.itel316.olbooks.models.Book;
 
 public class pdfreader extends AppCompatActivity {
 

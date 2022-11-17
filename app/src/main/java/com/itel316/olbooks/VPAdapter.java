@@ -1,8 +1,6 @@
 package com.itel316.olbooks;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,15 +14,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-import com.google.android.material.snackbar.Snackbar;
 import com.itel316.olbooks.helpers.DatabaseHelper;
 import com.itel316.olbooks.helpers.OlbookUtils;
 import com.itel316.olbooks.models.User;
 
 import java.util.ArrayList;
 import java.util.Date;
-
-import jp.wasabeef.blurry.Blurry;
 
 public class VPAdapter extends RecyclerView.Adapter<VPAdapter.ViewHolder> {
 
@@ -56,8 +51,8 @@ public class VPAdapter extends RecyclerView.Adapter<VPAdapter.ViewHolder> {
         holder.bookImage.setImageResource(R.drawable.logo);
         holder.bookTitle.setText(viewPagerItem.book.getTitle());
         holder.bookAuthor.setText("By "+viewPagerItem.book.getAuthor());
-        holder.bookLikes.setText(String.format("%s likes ", OlbookUtils.shortenNumber(viewPagerItem.getBook().getLikes())));
-        holder.bookSaved.setText(String.format("%s save ", OlbookUtils.shortenNumber(viewPagerItem.getBook().getSave())));
+        holder.bookLikes.setText(String.format("%s", OlbookUtils.shortenNumber(viewPagerItem.getBook().getLikes())));
+        holder.bookSaved.setText(String.format("%s", OlbookUtils.shortenNumber(viewPagerItem.getBook().getSave())));
         Context context = rootActivity.getApplicationContext();
         int resId = context.getResources().getIdentifier(String.format("drawable/%s", viewPagerItem.getBook().getPhoto()), null, context.getPackageName());
         holder.bookImage.setImageResource(resId);
@@ -78,22 +73,13 @@ public class VPAdapter extends RecyclerView.Adapter<VPAdapter.ViewHolder> {
             rootActivity.switchFragment(bookFrag);
         });
 
-        holder.bookLikes.setOnClickListener(e->{
-            Toast toasty;
-            toasty = Toast.makeText( rootActivity,"You liked this book!", Toast.LENGTH_SHORT);
-            dbHelper.likeBook(viewPagerItem.getBook().getLikes() + 1, viewPagerItem.getBook().getIsbn_10());
-            toasty.show();
-            viewPagerItem.getBook().fetchSelf(dbHelper);
-            rerender(holder, viewPagerItem);
-        });
-
         holder.bookSaved.setOnClickListener(e->{
             Toast toasty;
             if(OlbookUtils.doesBookAdded(curUser, viewPagerItem.getBook())) {
-                toasty = Toast.makeText( rootActivity,"Removed From Saved Books", Toast.LENGTH_SHORT);
+                toasty = Toast.makeText( rootActivity,"Removed From Saved Books!", Toast.LENGTH_SHORT);
                 dbHelper.removeFromBookList(viewPagerItem.getBook().getSave() - 1, curUser.getUserId(), viewPagerItem.getBook().getIsbn_10());
             }else{
-                toasty = Toast.makeText( rootActivity,"You liked this book!", Toast.LENGTH_SHORT);
+                toasty = Toast.makeText( rootActivity,"Book Saved!", Toast.LENGTH_SHORT);
                 dbHelper.insertToBookList(viewPagerItem.getBook().getSave() + 1, OlbookUtils.toISODateString(new Date()), curUser.getUserId(), viewPagerItem.getBook().getIsbn_10(), viewPagerItem.getBook().getIsbn_13());
             }
             curUser.fetchSelf(dbHelper);
@@ -116,10 +102,10 @@ public class VPAdapter extends RecyclerView.Adapter<VPAdapter.ViewHolder> {
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            btnView = itemView.findViewById(R.id.btn_view_details);
-            bookImage = itemView.findViewById(R.id.book_image);
-            bookTitle = itemView.findViewById(R.id.book_desc);
-            bookAuthor = itemView.findViewById(R.id.book_author);
+            btnView = itemView.findViewById(R.id.readbtn);
+            bookImage = itemView.findViewById(R.id.book_img);
+            bookTitle = itemView.findViewById(R.id.book_tit);
+            bookAuthor = itemView.findViewById(R.id.book_auth);
             bookLikes = itemView.findViewById(R.id.book_likes);
             bookSaved = itemView.findViewById(R.id.book_saves);
         }

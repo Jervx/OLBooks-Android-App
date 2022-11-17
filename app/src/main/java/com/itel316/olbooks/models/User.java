@@ -118,9 +118,7 @@ public class User implements Serializable {
         this.lname = lname;
     }
 
-    public void setPassword(String password) {
-        this.password = AuthHelper.hashPassword(password);
-    }
+    public void setPassword(String password) { this.password = password; }
 
     public void setRole(int role) {
         this.role = role;

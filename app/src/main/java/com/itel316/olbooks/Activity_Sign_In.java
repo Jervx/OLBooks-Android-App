@@ -45,7 +45,7 @@ public class Activity_Sign_In extends AppCompatActivity {
             }
 
             if(!Validator.validateNotEmpty(password_val)){
-                password.setError("Wrong Password");
+                password.setError("Empty Password");
                 return;
             }
 

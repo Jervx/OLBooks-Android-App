@@ -16,4 +16,6 @@
     <color name="transparent">#00FFFFFF</color>
     <color name="shad1">#5D86C2</color>
 
+    <color name="white">#fff</color>
+
 </resources>
