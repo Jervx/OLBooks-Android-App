@@ -2,6 +2,8 @@ package com.itel316.olbooks;
 
 import android.app.Dialog;
 import android.content.res.ColorStateList;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -29,7 +31,10 @@ import com.itel316.olbooks.helpers.DatabaseHelper;
 import com.itel316.olbooks.models.Book;
 import com.itel316.olbooks.models.User;
 
+import java.io.File;
 import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Fragment_Home extends Fragment {
 
@@ -52,6 +57,7 @@ public class Fragment_Home extends Fragment {
     private EditText searchField;
     private View parentView;
     private ImageView nofound;
+    private CircleImageView profile_image;
 
     ArrayList<ViewPagerItem> viewPagerItemArrayList;
 
@@ -91,6 +97,7 @@ public class Fragment_Home extends Fragment {
         textview_tags = (TextView) view.findViewById(R.id.textview_tags);
         swipe_view = (ViewPager2) view.findViewById(R.id.viewpager_swipe);
         greets = (TextView) view.findViewById((R.id.textView_greet));
+        profile_image = view.findViewById(R.id.profile_image);
         viewPagerItemArrayList = new ArrayList<>();
 
         parentView = getActivity().findViewById(R.id.frame_fragment);
@@ -116,6 +123,27 @@ public class Fragment_Home extends Fragment {
         dbHelper = new DatabaseHelper(getContext());
 
         curUser = (User) getArguments().getSerializable("curUser");
+        curUser.fetchSelf(dbHelper);
+        if (curUser.getImg() != null) {
+            try {
+                File imgFile = new File(curUser.getImg());
+                System.out.println("FOUND "+curUser.getImg());
+                if (imgFile.exists()) {
+                    Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                    profile_image.setImageBitmap(myBitmap);
+                }
+            } catch (Exception e) {
+                System.out.println("ERR IMAGE CUZ "+e);
+            }
+        }
+
+        profile_image.setOnClickListener(e -> {
+            Fragment_Profile profileFrag = new Fragment_Profile();
+            Bundle bund = new Bundle();
+            bund.putSerializable("curUser", curUser);
+            profileFrag.setArguments(bund);
+            ((Activity_Home) getActivity()).switchFragment(profileFrag);
+        });
         loadBooks();
         return view;
     }

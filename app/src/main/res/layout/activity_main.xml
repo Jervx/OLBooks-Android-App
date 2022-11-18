@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="417dp"
-        android:layout_height="237dp"
+        android:layout_width="349dp"
+        android:layout_height="193dp"
         android:fontFamily="@font/inter_semibold"
         android:justificationMode="inter_word"
         android:scaleType="centerCrop"

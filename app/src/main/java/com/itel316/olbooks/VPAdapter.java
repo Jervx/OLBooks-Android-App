@@ -73,20 +73,9 @@ public class VPAdapter extends RecyclerView.Adapter<VPAdapter.ViewHolder> {
             rootActivity.switchFragment(bookFrag);
         });
 
-        holder.bookSaved.setOnClickListener(e->{
-            Toast toasty;
-            if(OlbookUtils.doesBookAdded(curUser, viewPagerItem.getBook())) {
-                toasty = Toast.makeText( rootActivity,"Removed From Saved Books!", Toast.LENGTH_SHORT);
-                dbHelper.removeFromBookList(viewPagerItem.getBook().getSave() - 1, curUser.getUserId(), viewPagerItem.getBook().getIsbn_10());
-            }else{
-                toasty = Toast.makeText( rootActivity,"Book Saved!", Toast.LENGTH_SHORT);
-                dbHelper.insertToBookList(viewPagerItem.getBook().getSave() + 1, OlbookUtils.toISODateString(new Date()), curUser.getUserId(), viewPagerItem.getBook().getIsbn_10(), viewPagerItem.getBook().getIsbn_13());
-            }
-            curUser.fetchSelf(dbHelper);
-            viewPagerItem.getBook().fetchSelf(dbHelper);
-            toasty.show();
-            rerender(holder, viewPagerItem);
-        });
+        holder.bookLikes.setTooltipText(String.format("%s People Read This Book", OlbookUtils.shortenNumber(viewPagerItem.getBook().getLikes())));
+        holder.bookSaved.setTooltipText(String.format("%s Users Saved This Book", OlbookUtils.shortenNumber(viewPagerItem.getBook().getSave())));
+
     }
 
     @Override

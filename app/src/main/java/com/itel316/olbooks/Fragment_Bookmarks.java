@@ -66,7 +66,7 @@ public class Fragment_Bookmarks extends Fragment {
 
         dbHelper = new DatabaseHelper(getContext());
         curUser = (User) getArguments().getSerializable("curUser");
-
+        curUser.fetchSelf(dbHelper);
         nofound = view.findViewById(R.id.nofound);
         booklist = view.findViewById(R.id.booklist);
 
@@ -91,6 +91,15 @@ public class Fragment_Bookmarks extends Fragment {
             int resId = getContext().getResources().getIdentifier(String.format("drawable/%s", bk.getPhoto()), null, getContext().getPackageName());
             book_img.setImageResource(resId);
 
+            book_img.setOnClickListener(e -> {
+                Fragment_BookInfo bookFrag = new Fragment_BookInfo();
+                Bundle bund = new Bundle();
+                bund.putSerializable("curBook", bk);
+                bund.putSerializable("curUser", curUser);
+                bookFrag.setArguments(bund);
+                ((Activity_Home) getActivity()).switchFragment(bookFrag);
+            });
+
             Button read = v.findViewById(R.id.readbtn);
             ImageButton remove = v.findViewById(R.id.remove_btn);
 
@@ -112,7 +121,6 @@ public class Fragment_Bookmarks extends Fragment {
                 for(View AddedBks : AddedBoooks) booklist.removeView(AddedBks);
                 renderBooks();
             });
-
 
             AddedBoooks.add(v);
             booklist.addView(v);

@@ -3,6 +3,8 @@ package com.itel316.olbooks.models;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -24,28 +26,31 @@ public class User implements Serializable {
     private Date dateJoined;
     public BookList bookList;
     private String Liked;
-    private byte [] img;
+    private String img;
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
 
     public User(String email, DatabaseHelper dbHelper) {
         this.email = email;
         fetchSelf(dbHelper);
-
-        if(img == null){
-
-        }
     }
 
     public void saveState(DatabaseHelper dbHelper) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         try {
             ContentValues values = new ContentValues();
-            //fname TEXT, lname TEXT, password
             values.put("fname", this.getFname());
             values.put("lname", this.getLname());
             values.put("password", this.getPassword());
             values.put("liked", this.getLiked());
+            values.put("img", this.getImg());
             db.update("user", values, "userId = " + this.getUserId(), null);
-//            Cursor users = db.rawQuery("SELECT * FROM user where userId = "+userId, null);
         } catch (Exception e) {
         }
     }
@@ -68,6 +73,7 @@ public class User implements Serializable {
         setPassword(findUser.getString(4));
         setIsLoggedIn(findUser.getInt(5));
         setLiked(findUser.getString(6));
+        setImg(findUser.getString(9));
         this.bookList = getBookList(dbhelper);
     }
 
@@ -137,5 +143,20 @@ public class User implements Serializable {
         this.dateJoined = dateJoined;
     }
 
-
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", email='" + email + '\'' +
+                ", fname='" + fname + '\'' +
+                ", lname='" + lname + '\'' +
+                ", password='" + password + '\'' +
+                ", role=" + role +
+                ", isLoggedIn=" + isLoggedIn +
+                ", dateJoined=" + dateJoined +
+                ", bookList=" + bookList +
+                ", Liked='" + Liked + '\'' +
+                ", img='" + img + '\'' +
+                '}';
+    }
 }

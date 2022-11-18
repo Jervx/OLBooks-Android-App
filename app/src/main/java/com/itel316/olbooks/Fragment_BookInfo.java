@@ -69,6 +69,7 @@ public class Fragment_BookInfo extends Fragment {
         View view = inflater.inflate(R.layout.fragment__book_info, container, false);
         dbHelper = new DatabaseHelper(getContext());
         curUser = (User) getArguments().getSerializable("curUser");
+        curUser.fetchSelf(dbHelper);
         curBook = (Book) getArguments().getSerializable("curBook");
 
         cover_blur = (ImageView) view.findViewById(R.id.cover_blur);
@@ -87,15 +88,6 @@ public class Fragment_BookInfo extends Fragment {
         TextView book_likes = view.findViewById(R.id.book_likes);
 
         rerender(view);
-
-        book_likes.setOnClickListener(e->{
-            Snackbar snackbar;
-            dbHelper.likeBook(curBook.getLikes() + 1, curBook.getIsbn_10());
-            snackbar = Snackbar.make( view,"You liked this book!",Snackbar.LENGTH_SHORT);
-            snackbar.show();
-            curBook.fetchSelf(dbHelper);
-            rerender(view);
-        });
 
         book_saves_btnText.setOnClickListener(e->{
             Snackbar snackbar;

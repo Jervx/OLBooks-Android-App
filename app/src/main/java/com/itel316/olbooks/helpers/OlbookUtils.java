@@ -1,8 +1,13 @@
 package com.itel316.olbooks.helpers;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
+
 import com.itel316.olbooks.models.Book;
 import com.itel316.olbooks.models.User;
 
+import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.time.ZonedDateTime;
 import java.util.Date;

@@ -11,38 +11,52 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_image"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:src="@drawable/empty_profile"
+            app:civ_border_color="@color/CoffeeBlack_400"
+            app:civ_border_width="2dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView_greet"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.043"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView_greet"
+            app:layout_constraintVertical_bias="0.294" />
+
         <TextView
             android:id="@+id/textView_greet"
-            android:layout_width="154dp"
-            android:layout_height="27dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="28dp"
+            android:layout_width="153dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
             android:fontFamily="@font/gentium_book_basic"
             android:text="Hey User"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/CoffeeBlack_900"
             android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/profile_image"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textView_greet2"
             android:layout_width="358dp"
             android:layout_height="40dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="20dp"
             android:fontFamily="@font/gentium_book_basic_bold"
             android:text="Let's Start Reading"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textColor="@color/CoffeeBlack_900"
             android:textSize="34sp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/profile_image"
             app:layout_constraintTop_toBottomOf="@+id/textView_greet" />
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewpager_swipe"
             android:layout_width="match_parent"
-            android:layout_height="600dp"
+            android:layout_height="630dp"
             android:layout_marginVertical="18dp"
             android:background="@color/transparent"
             android:paddingStart="34dp"

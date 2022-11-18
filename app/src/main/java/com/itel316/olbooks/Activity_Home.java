@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.KeyEvent;
 import android.view.View;
 
@@ -23,6 +24,8 @@ public class Activity_Home extends AppCompatActivity {
     ActivityHomeBinding binding;
     private User currentUser;
     private Fragment curFrag;
+
+    Intent dataProvided;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,12 +61,6 @@ public class Activity_Home extends AppCompatActivity {
                 switchFragment(fragHome);
             }
 
-//            if (id == R.id.navigation_search) {
-//                Fragment_Search fragSearch = new Fragment_Search();
-//                fragSearch.setArguments(bund);
-//                switchFragment(fragSearch);
-//            }
-
             if (id == R.id.navigation_bookmarks) {
                 Fragment_Bookmarks fragBookmarks = new Fragment_Bookmarks();
                 fragBookmarks.setArguments(bund);
@@ -88,7 +85,7 @@ public class Activity_Home extends AppCompatActivity {
         FragmentTransaction fragTrans = fragMan.beginTransaction();
         curFrag = frag;
 
-        if(fragMan.getBackStackEntryCount() > 8) fragMan.popBackStack();
+        if (fragMan.getBackStackEntryCount() > 8) fragMan.popBackStack();
 
         fragTrans.replace(R.id.frame_fragment, frag).addToBackStack("root_frag").commit();
     }
@@ -102,41 +99,38 @@ public class Activity_Home extends AppCompatActivity {
 
             int foc = 0;
 
-            if(frags.size() == 0){
+            if (frags.size() == 0) {
                 foc = 0;
-            }else{
+            } else {
                 Fragment frag = getSupportFragmentManager().getFragments().get(frags.size() > 0 ? frags.size() - 1 : 0);
                 curFrag = frag;
 
                 if (frag.getClass() == Fragment_Home.class) foc = 0;
-//                if (frag.getClass() == Fragment_Search.class) foc = 1;
-                if (frag.getClass() == Fragment_Bookmarks.class) foc = 2;
-                if (frag.getClass() == Fragment_Profile.class) foc = 3;
+                if (frag.getClass() == Fragment_Bookmarks.class) foc = 1;
+                if (frag.getClass() == Fragment_Profile.class) foc = 2;
             }
 
-            binding.bottomNavigationView.getMenu().getItem(foc).setChecked(true);
+            if(foc != cnt){
+                binding.bottomNavigationView.getMenu().getItem(foc).setChecked(true);
+            }
         } else finish();
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        System.out.println("Fire "+ requestCode);
         try {
-            switch (requestCode) {
-
-                case 1:
-                    if (resultCode == Activity.RESULT_OK) {
-                        System.out.println("OK ");
-                        //data gives you the image uri. Try to convert that to bitmap
-                        break;
-                    } else if (resultCode == Activity.RESULT_CANCELED) {
-
-                    }
-                    break;
+            if (resultCode == RESULT_OK && requestCode == 1000) {
+                dataProvided = data;
+            } else if (resultCode == Activity.RESULT_CANCELED) {
+                System.out.println("CANCELLED ");
             }
         } catch (Exception e) {
-            System.out.println("Fire ERR "+e);
+            System.out.println("Fire ERR " + e);
         }
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
 }

@@ -31,12 +31,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
 
-
         DatabaseHelper dbhelper = new DatabaseHelper(getApplicationContext());
-//        dbhelper.truncateDbs(dbhelper.getWritableDatabase(), new String [] {"book"});
+//        dbhelper.dropDbs(dbhelper.getWritableDatabase(), new String [] {"user"});
         dbhelper.checkTableExist();
-
-
         DateFormat format = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
         // INSERT BOOK
         try {
@@ -52,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent homeIntent = new Intent(getApplicationContext(), Activity_Home.class);
                 result.moveToNext();
                 User user = new User(result.getString(1), dbhelper);
+                System.out.println("CUR USER :"+user.toString());
                 homeIntent.putExtra("CURRENT_USER", user);
                 startActivity(homeIntent);
                 finish();

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@drawable/bg"
+    android:background="@drawable/bg2"
     android:layout_height="match_parent"
     tools:context=".Fragment_Profile">
 
@@ -16,8 +16,8 @@
             android:layout_width="96dp"
             android:layout_height="96dp"
             android:layout_marginTop="20dp"
-            android:src="@drawable/logo"
-            app:civ_border_color="@color/CoffeeBlack_700"
+            android:src="@drawable/empty_profile"
+            app:civ_border_color="@color/CoffeeBlack_400"
             app:civ_border_width="2dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
@@ -136,6 +136,17 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <Button
+            android:id="@+id/exitapp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:fontFamily="@font/gentium_book_basic"
+            android:text="Exit App"
+            app:layout_constraintEnd_toEndOf="@+id/logout"
+            app:layout_constraintStart_toStartOf="@+id/logout"
+            app:layout_constraintTop_toBottomOf="@+id/logout" />
+
+        <Button
             android:id="@+id/save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -193,7 +204,7 @@
             android:id="@+id/change_profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginVertical="16dp"
             android:fontFamily="@font/gentium_book_basic"
             android:text="Change Profile"
             android:textSize="14sp"
