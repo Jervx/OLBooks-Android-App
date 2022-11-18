@@ -49,7 +49,7 @@ public class VPAdapter extends RecyclerView.Adapter<VPAdapter.ViewHolder> {
 
     public void rerender(ViewHolder holder, ViewPagerItem viewPagerItem){
         holder.bookImage.setImageResource(R.drawable.logo);
-        holder.bookTitle.setText(viewPagerItem.book.getTitle());
+        holder.bookTitle.setText(OlbookUtils.shortener(viewPagerItem.book.getTitle()));
         holder.bookAuthor.setText("By "+viewPagerItem.book.getAuthor());
         holder.bookLikes.setText(String.format("%s ", OlbookUtils.shortenNumber(viewPagerItem.getBook().getLikes())));
         holder.bookSaved.setText(String.format("%s ", OlbookUtils.shortenNumber(viewPagerItem.getBook().getSave())));

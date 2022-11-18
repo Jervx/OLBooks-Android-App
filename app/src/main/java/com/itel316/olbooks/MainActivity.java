@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide();
 
         DatabaseHelper dbhelper = new DatabaseHelper(getApplicationContext());
-//        dbhelper.dropDbs(dbhelper.getWritableDatabase(), new String [] {"user"});
+//      dbhelper.dropDbs(dbhelper.getWritableDatabase(), new String [] {"user"});
         dbhelper.checkTableExist();
         DateFormat format = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
         // INSERT BOOK
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
             dbhelper.insertBook("processing1251278501uigt1hg8912", "0123736021", "978-0123736024", "Learning Processing: A Beginner's Guide to Programming Images, Animation, and Interaction", "Daniel Shiffman", "Programming<~>Coding<~>Processing<~>Graphics<~>Animation<~>Pixels<~>Patterns", "The free, open-source Processing programming language environment was created at MIT for people who want to develop images, animation, and sound. Based on the ubiquitous Java, it provides an alternative to daunting languages and expensive proprietary software.<~> This book gives graphic designers, artists and illustrators of all stripes a jump start to working with processing by providing detailed information on the basic principles of programming with the language, followed by careful, step-by-step explanations of select advanced techniques.<~> The author teaches computer graphics at NYU's Tisch School of the Arts, and his book has been developed with a supportive learning experience at its core. From algorithms and data mining to rendering and debugging, it teaches object-oriented programming from the ground up within the fascinating context of interactive visual media.<~> Previously announced as \"Pixels, Patterns, and Processing\"", OlbookUtils.toISODateString(format.parse("02/09/2008")), OlbookUtils.toISODateString(new Date()), "processing3y1t98h1th19ga.pdf", 4521, 3234);
 
             //TODO HERE INSERT BOOKS
-            dbhelper.insertBook("", "", "", "", "", "NAT GEO<~>Nature<~>Bird", "Description here", OlbookUtils.toISODateString(format.parse("31/04/2018")), OlbookUtils.toISODateString(new Date()), "pdffilename.pdf", 61400, 7234);
+//            dbhelper.insertBook("", "", "", "", "", "NAT GEO<~>Nature<~>Bird", "Description here", OlbookUtils.toISODateString(format.parse("31/04/2018")), OlbookUtils.toISODateString(new Date()), "pdffilename.pdf", 61400, 7234);
         } catch (Exception e) {
             System.out.println("ERR " + e);
         }

@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.itel316.olbooks.helpers.DatabaseHelper;
+import com.itel316.olbooks.helpers.OlbookUtils;
 import com.itel316.olbooks.models.Book;
 import com.itel316.olbooks.models.BookList;
 import com.itel316.olbooks.models.User;
@@ -103,7 +104,7 @@ public class Fragment_Bookmarks extends Fragment {
             Button read = v.findViewById(R.id.readbtn);
             ImageButton remove = v.findViewById(R.id.remove_btn);
 
-            ((TextView) v.findViewById(R.id.book_tit)).setText(bk.getTitle());
+            ((TextView) v.findViewById(R.id.book_tit)).setText(OlbookUtils.shortener(bk.getTitle()));
             ((TextView) v.findViewById(R.id.book_auth)).setText(bk.getAuthor());
 
             read.setOnClickListener(e -> {
