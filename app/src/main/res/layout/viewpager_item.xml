@@ -46,7 +46,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="25dp"
+                    android:layout_marginTop="12dp"
                     android:layout_marginEnd="8dp"
                     android:fontFamily="@font/gentium_book_basic_bold"
                     android:text="Book Title"
@@ -57,7 +57,7 @@
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/book_img" />
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
                 <TextView
                     android:id="@+id/book_auth"
@@ -77,22 +77,23 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="20dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
                     android:backgroundTint="@color/CoffeeBlack_900"
                     android:fontFamily="@font/gentium_book_basic"
                     android:text="View Details"
                     android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.6"
-                    app:layout_constraintStart_toStartOf="@+id/book_auth"
-                    app:layout_constraintTop_toBottomOf="@+id/book_auth" />
+                    app:layout_constraintStart_toStartOf="@+id/book_auth" />
 
                 <LinearLayout
+                    android:id="@+id/linearLayout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
                     android:gravity="center"
                     android:orientation="horizontal"
-                    android:layout_marginTop="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"

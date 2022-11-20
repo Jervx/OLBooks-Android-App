@@ -117,7 +117,7 @@ public class Fragment_BookInfo extends Fragment {
     }
 
     public void rerender(View view){
-        ((TextView) view.findViewById(R.id.txtView_author_name)).setText("By " + curBook.getAuthor());
+        ((TextView) view.findViewById(R.id.txtView_author_name)).setText("By " + OlbookUtils.shorterAuthors(curBook.getAuthor(), true));
         ((TextView) view.findViewById(R.id.text_view_more_desc)).setText(String.format("Published : %s\nISBN-10 : %s\nISBN-13 : %s", new SimpleDateFormat("EEE, d MMM yyyy").format(OlbookUtils.fromIoDateStringToDate(curBook.getPubDate()))+"" , curBook.getIsbn_10(), curBook.getIsbn_13()));
         ((TextView) view.findViewById(R.id.book_title)).setText(curBook.getTitle());
         ((TextView) view.findViewById(R.id.book_likes)).setText(OlbookUtils.shortenNumber(curBook.getLikes()) + " ");

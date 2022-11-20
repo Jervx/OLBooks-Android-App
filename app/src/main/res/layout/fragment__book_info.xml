@@ -83,8 +83,9 @@
                 android:id="@+id/txtView_author_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
                 android:layout_weight="1"
-                android:fontFamily="@font/gentium_book_basic"
+                android:fontFamily="@font/gentium_book_basic_bold"
                 android:text="TextView"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColor="@color/CoffeeBlack_900"
@@ -96,7 +97,7 @@
                 android:layout_height="19dp"
                 android:layout_marginEnd="20dp"
                 android:drawableRight="@drawable/ic_baseline_remove_red_eye_24"
-                android:fontFamily="@font/inter_semibold"
+                android:fontFamily="@font/gentium_book_basic"
                 android:text=""
                 android:textAlignment="textEnd"
                 app:layout_constraintEnd_toEndOf="parent" />
@@ -106,7 +107,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="18dp"
                 android:drawableRight="@drawable/ic_bookmark"
-                android:fontFamily="@font/inter_semibold"
+                android:fontFamily="@font/gentium_book_basic"
                 android:text=""
                 android:textAlignment="textEnd"
                 app:layout_constraintEnd_toEndOf="parent" />
