@@ -85,14 +85,14 @@ public class pdfreader extends AppCompatActivity {
                 .scrollHandle(null)
                 .enableAntialiasing(true) // improve rendering a little bit on low-res screens
                 .spacing(0)
-                .autoSpacing(true) // add dynamic spacing to fit each page on its own on the screen
+                .autoSpacing(false) // add dynamic spacing to fit each page on its own on the screen
                 .fitEachPage(true) // fit each page to the view, else smaller pages are scaled relative to largest page.
                 .pageSnap(true) // snap pages to screen boundaries
                 .pageFling(false) // make a fling change only a single page like ViewPager
                 .nightMode(nightMode) // toggle night mode
                 .onPageChange((p, i) -> {
-                    pageIndicator.setText(String.format("%d / %d", p, i));
-                    totalPage = i;
+                    pageIndicator.setText(String.format("%d / %d", p + 1, i));
+                    totalPage = i + 1;
                 })
                 .load();
 
@@ -104,18 +104,18 @@ public class pdfreader extends AppCompatActivity {
             EditText pagejumpinpt = tagDialog.findViewById(R.id.pagejumpinpt);
             Button jumpage = tagDialog.findViewById(R.id.jumpage);
 
-            pagesindicator.setText("0 - "+totalPage);
+            pagesindicator.setText("1 - "+totalPage);
             jumpage.setOnClickListener(er -> {
                 int tojump = Integer.parseInt(pagejumpinpt.getText().toString());
-                if(tojump > totalPage){
-                    Toast.makeText(this, "This book only have 0 - "+totalPage + " 😕", Toast.LENGTH_LONG).show();
+                if(tojump - 1 > totalPage - 1){
+                    Toast.makeText(this, "This book only have 1 - "+totalPage + " 😕", Toast.LENGTH_LONG).show();
                     return;
                 }
                 reader.fromAsset(pdf)
                         .enableSwipe(true) // allows to block changing pages using swipe
                         .swipeHorizontal(false)
                         .enableDoubletap(true)
-                        .defaultPage(tojump)
+                        .defaultPage(tojump - 1)
                         .enableAnnotationRendering(false) // render annotations (such as comments, colors or forms)
                         .scrollHandle(null)
                         .enableAntialiasing(true) // improve rendering a little bit on low-res screens
@@ -126,7 +126,7 @@ public class pdfreader extends AppCompatActivity {
                         .pageFling(false) // make a fling change only a single page like ViewPager
                         .nightMode(nightMode) // toggle night mode
                         .onPageChange((p, i) -> {
-                            pageIndicator.setText(String.format("%d / %d", p, i));
+                            pageIndicator.setText(String.format("%d / %d", p + 1, i ));
                             totalPage = i;
                         })
                         .load();

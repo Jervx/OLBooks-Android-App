@@ -1,8 +1,6 @@
 package com.itel316.olbooks;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -16,7 +14,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.itel316.olbooks.helpers.DatabaseHelper;
 import com.itel316.olbooks.helpers.OlbookUtils;
 import com.itel316.olbooks.models.Book;
@@ -24,8 +21,6 @@ import com.itel316.olbooks.models.User;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import jp.wasabeef.blurry.Blurry;
 
 public class Fragment_BookInfo extends Fragment {
 
@@ -91,7 +86,7 @@ public class Fragment_BookInfo extends Fragment {
         ((ImageView) view.findViewById(R.id.cover)).setImageResource(resId);
 
         book_saves_btnText = view.findViewById(R.id.book_saves_btnText);
-        TextView book_likes = view.findViewById(R.id.book_likes);
+        TextView book_likes = view.findViewById(R.id.book_views);
 
         rerender(view);
 
@@ -124,8 +119,8 @@ public class Fragment_BookInfo extends Fragment {
         ((TextView) view.findViewById(R.id.txtView_author_name)).setText("By " + OlbookUtils.shorterAuthors(curBook.getAuthor(), true));
         ((TextView) view.findViewById(R.id.text_view_more_desc)).setText(String.format("Published : %s\nISBN-10 : %s\nISBN-13 : %s", new SimpleDateFormat("EEE, d MMM yyyy").format(OlbookUtils.fromIoDateStringToDate(curBook.getPubDate()))+"" , curBook.getIsbn_10(), curBook.getIsbn_13()));
         ((TextView) view.findViewById(R.id.book_title)).setText(curBook.getTitle());
-        ((TextView) view.findViewById(R.id.book_likes)).setText(OlbookUtils.shortenNumber(curBook.getLikes()) + " 👁");
-        ((TextView) view.findViewById(R.id.book_saves)).setText(OlbookUtils.shortenNumber(curBook.getSave()) + " 🔖");
+        ((TextView) view.findViewById(R.id.book_views)).setText(OlbookUtils.shortenNumber(curBook.getLikes()) + " 👁");
+        ((TextView) view.findViewById(R.id.book_saved)).setText(OlbookUtils.shortenNumber(curBook.getSave()) + " 🔖");
 
         ((TextView) view.findViewById(R.id.book_tit)).setText("\t\t" + curBook.getDescription().replaceAll("<~>", "\n\n\t"));
 

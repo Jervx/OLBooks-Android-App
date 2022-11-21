@@ -10,8 +10,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:background="@color/white"
-        android:padding="8dp"
-        android:paddingBottom="54dp"
+        android:paddingHorizontal="8dp"
+        android:paddingBottom="24dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -61,11 +61,11 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="18dp"
             android:layout_marginTop="16dp"
+            android:breakStrategy="high_quality"
             android:fontFamily="@font/open_sans"
             android:lineHeight="24dp"
             android:text="this is just a description desune cuz it is awesome detu that work in every situation \n\n \thello world happoy asd"
-            android:breakStrategy="high_quality"
-            android:textColor="@color/CoffeeBlack_900"
+            android:textColor="@color/pirate_400"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.428"
@@ -78,33 +78,33 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="18dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="56dp"
+            android:layout_marginTop="24dp"
             android:layout_marginEnd="34dp"
+            android:breakStrategy="high_quality"
             android:fontFamily="@font/open_sans_semibold"
             android:justificationMode="inter_word"
             android:text="Android studio is the most awesome IDE for developing android apps"
             android:textAlignment="viewStart"
             android:textColor="@color/Black"
             android:textSize="24sp"
-            android:breakStrategy="high_quality"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.514"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/coverContainer" />
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="34dp"
+            android:layout_marginTop="24dp"
+            android:breakStrategy="high_quality"
             android:fontFamily="@font/open_sans_semibold"
             android:text="Description"
-            android:breakStrategy="high_quality"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="@color/CoffeeBlack_900"
+            android:textColor="@color/pirate_800"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+            app:layout_constraintTop_toBottomOf="@+id/divider" />
 
         <TextView
             android:id="@+id/textView12"
@@ -128,7 +128,7 @@
             android:fontFamily="@font/montserrat"
             android:text="TextView"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            android:textColor="@color/CoffeeBlack_900"
+            android:textColor="@color/pirate_500"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="@+id/book_title"
             app:layout_constraintTop_toBottomOf="@+id/book_title" />
@@ -138,14 +138,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="18dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="24dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtView_author_name">
+            app:layout_constraintTop_toBottomOf="@+id/coverContainer">
 
             <TextView
-                android:id="@+id/book_likes"
+                android:id="@+id/book_views"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
@@ -157,7 +157,7 @@
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <TextView
-                android:id="@+id/book_saves"
+                android:id="@+id/book_saved"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/open_sans_semibold"
@@ -177,6 +177,7 @@
             android:fontFamily="@font/open_sans"
             android:lineHeight="20dp"
             android:text="TextView"
+            android:textColor="@color/pirate_500"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
@@ -233,6 +234,16 @@
             android:src="@drawable/arrowleft"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="409dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="24dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtView_author_name" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

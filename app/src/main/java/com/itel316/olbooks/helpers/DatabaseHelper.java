@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.itel316.olbooks.models.Book;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.TimeZone;
 
@@ -211,6 +212,100 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return books;
     }
+
+    public ArrayList<Book> getSuggestedBook( int count ){
+        SQLiteDatabase db = getWritableDatabase();
+
+        String statement = "SELECT * FROM book ORDER BY RANDOM() LIMIT "+count+";";
+
+        ArrayList<Book> bk = new ArrayList<>();
+
+        Cursor bookResult = execRawQuery(statement, null);
+
+        if(bookResult.getCount() > 0){
+            while(bookResult.moveToNext()) {
+                bk.add(new Book(
+                        bookResult.getString(0),
+                        bookResult.getString(1),
+                        bookResult.getString(2),
+                        bookResult.getString(3),
+                        bookResult.getString(4),
+                        bookResult.getString(5),
+                        bookResult.getString(6),
+                        bookResult.getString(7),
+                        bookResult.getString(8),
+                        bookResult.getString(9),
+                        bookResult.getInt(10),
+                        bookResult.getInt(11)
+                ));
+            }
+        }
+
+        return bk;
+    }
+
+    public ArrayList<Book> getMostViews( int count ){
+        SQLiteDatabase db = getWritableDatabase();
+
+        String statement = "SELECT * FROM book ORDER BY like_count DESC LIMIT "+count+";";
+
+        ArrayList<Book> bk = new ArrayList<>();
+
+        Cursor bookResult = execRawQuery(statement, null);
+
+        if(bookResult.getCount() > 0){
+            while(bookResult.moveToNext()) {
+                bk.add(new Book(
+                        bookResult.getString(0),
+                        bookResult.getString(1),
+                        bookResult.getString(2),
+                        bookResult.getString(3),
+                        bookResult.getString(4),
+                        bookResult.getString(5),
+                        bookResult.getString(6),
+                        bookResult.getString(7),
+                        bookResult.getString(8),
+                        bookResult.getString(9),
+                        bookResult.getInt(10),
+                        bookResult.getInt(11)
+                ));
+            }
+        }
+
+        return bk;
+    }
+
+    public ArrayList<Book> getMostSaved( int count ){
+        SQLiteDatabase db = getWritableDatabase();
+
+        String statement = "SELECT * FROM book ORDER BY save_count DESC LIMIT "+count+";";
+
+        ArrayList<Book> bk = new ArrayList<>();
+
+        Cursor bookResult = execRawQuery(statement, null);
+
+        if(bookResult.getCount() > 0){
+            while(bookResult.moveToNext()) {
+                bk.add(new Book(
+                        bookResult.getString(0),
+                        bookResult.getString(1),
+                        bookResult.getString(2),
+                        bookResult.getString(3),
+                        bookResult.getString(4),
+                        bookResult.getString(5),
+                        bookResult.getString(6),
+                        bookResult.getString(7),
+                        bookResult.getString(8),
+                        bookResult.getString(9),
+                        bookResult.getInt(10),
+                        bookResult.getInt(11)
+                ));
+            }
+        }
+
+        return bk;
+    }
+
 
     public Book [] getBooksBySearch(String search){
 

@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,7 +18,6 @@ import com.itel316.olbooks.helpers.OlbookUtils;
 import com.itel316.olbooks.models.User;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class VPAdapter extends RecyclerView.Adapter<VPAdapter.ViewHolder> {
 
@@ -95,8 +93,8 @@ public class VPAdapter extends RecyclerView.Adapter<VPAdapter.ViewHolder> {
             bookImage = itemView.findViewById(R.id.book_img);
             bookTitle = itemView.findViewById(R.id.book_tit);
             bookAuthor = itemView.findViewById(R.id.book_auth);
-            bookLikes = itemView.findViewById(R.id.book_likes);
-            bookSaved = itemView.findViewById(R.id.book_saves);
+            bookLikes = itemView.findViewById(R.id.book_views);
+            bookSaved = itemView.findViewById(R.id.book_saved);
         }
     }
 

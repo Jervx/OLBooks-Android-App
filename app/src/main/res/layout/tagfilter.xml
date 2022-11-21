@@ -43,7 +43,7 @@
         android:layout_marginEnd="16dp"
         android:background="@drawable/button_rounded"
         android:fontFamily="@font/open_sans_semibold"
-        android:text="Add Tag"
+        android:text="Add"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"

@@ -17,7 +17,7 @@
     <color name="shad1">#5D86C2</color>
 
     <color name="white">#fff</color>
-    <color name="bookinfobgimage">#f7f7f7</color>
+    <color name="bookinfobgimage">#ededed</color>
 
 <!-- firefly -->
     <color name="firefly_100">#A05F7D</color>
@@ -28,5 +28,36 @@
     <color name="firefly_600">#5C2E4F</color>
     <color name="firefly_700">#4B2946</color>
     <color name="firefly_800">#3D2230</color>
+
+<!-- Lawless -->
+    <color name="lawless_100">#D8E365</color>
+    <color name="lawless_200">#C3D877</color>
+    <color name="lawless_300">#98CA74</color>
+    <color name="lawless_400">#81BD6F</color>
+    <color name="lawless_500">#64A960</color>
+    <color name="lawless_600">#4F9765</color>
+    <color name="lawless_700">#3D836B</color>
+    <color name="lawless_800">#2E6874</color>
+
+    <!-- Innocent -->
+    <color name="innocent_100">#D8E365</color>
+    <color name="innocent_200">#677B8A</color>
+    <color name="innocent_300">#516372</color>
+    <color name="innocent_400">#3C5366</color>
+    <color name="innocent_500">#263E52</color>
+    <color name="innocent_600">#112E48</color>
+    <color name="innocent_700">#062239</color>
+    <color name="innocent_800">#00162A</color>
+
+    <!-- Pirate -->
+
+    <color name="pirate_100">#5D6267</color>
+    <color name="pirate_200">#4F4D50</color>
+    <color name="pirate_300">#3B3C44</color>
+    <color name="pirate_400">#272C30</color>
+    <color name="pirate_500">#1E2327</color>
+    <color name="pirate_600">#0E151B</color>
+    <color name="pirate_700">#0A0D12</color>
+    <color name="pirate_800">#010101</color>
 
 </resources>

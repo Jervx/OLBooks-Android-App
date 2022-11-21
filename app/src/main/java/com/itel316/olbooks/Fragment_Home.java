@@ -4,9 +4,11 @@ import android.app.Dialog;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,11 +25,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.flaviofaria.kenburnsview.KenBurnsView;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.itel316.olbooks.helpers.DatabaseHelper;
+import com.itel316.olbooks.helpers.OlbookUtils;
 import com.itel316.olbooks.models.Book;
 import com.itel316.olbooks.models.User;
 
@@ -35,6 +40,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import jp.wasabeef.blurry.Blurry;
 
 public class Fragment_Home extends Fragment {
 
@@ -58,8 +64,11 @@ public class Fragment_Home extends Fragment {
     private View parentView;
     private ImageView nofound;
     private CircleImageView profile_image;
+    private LinearLayout youmightlike, mostViews, mostSaved;
+    private int limit = 10;
 
     ArrayList<ViewPagerItem> viewPagerItemArrayList;
+    ArrayList<Book> youMightLikeList, mostViewList, mostSavedList;
 
     public Fragment_Home() {
 
@@ -90,6 +99,10 @@ public class Fragment_Home extends Fragment {
         View view = inflater.inflate(R.layout.fragment__home, container, false);
         category_tags = new ArrayList<>();
         this.container = container;
+
+        mostViews = (LinearLayout) view.findViewById(R.id.mostviews);
+        youmightlike = (LinearLayout) view.findViewById(R.id.youmightlike);
+        mostSaved = (LinearLayout) view.findViewById(R.id.mostsaved);
 
         searchField = (EditText) view.findViewById(R.id.search_field);
         chipContainer = (ChipGroup) view.findViewById(R.id.chip_container);
@@ -147,8 +160,100 @@ public class Fragment_Home extends Fragment {
             profileFrag.setArguments(bund);
             ((Activity_Home) getActivity()).switchFragment(profileFrag);
         });
+        loadMiniBooks();
         loadBooks();
         return view;
+    }
+
+    public void loadMiniBooks(){
+        youMightLikeList = dbHelper.getSuggestedBook(limit);
+        mostViewList = dbHelper.getMostViews(limit);
+        mostSavedList = dbHelper.getMostSaved(limit);
+        renderMinis();
+    }
+
+    public void renderMinis(){
+        for(Book bk : youMightLikeList){
+            View v = View.inflate(getContext(), R.layout.suggested_book_item, null);
+            KenBurnsView banner = (KenBurnsView) v.findViewById(R.id.book_img);
+
+            int resId = getContext().getResources().getIdentifier(String.format("drawable/%s", bk.getPhoto()), null, getContext().getPackageName());
+            banner.setImageResource(resId);
+
+            ImageView v2 = v.findViewById(R.id.cover2);
+            v2.setImageResource(resId);
+            Bitmap bm=((BitmapDrawable)v2.getDrawable()).getBitmap();
+            Blurry.with(getContext()).from(bm).into(v2);
+
+            ((TextView) v.findViewById(R.id.book_views)).setText(OlbookUtils.shortenNumber(bk.getLikes()) + " 👁");
+            ((TextView) v.findViewById(R.id.book_saved)).setText(OlbookUtils.shortenNumber(bk.getSave()) + " 🔖");
+
+            banner.setOnClickListener(e -> {
+                Fragment_BookInfo bookFrag = new Fragment_BookInfo();
+                Bundle bund = new Bundle();
+                bund.putSerializable("curBook", bk);
+                bund.putSerializable("curUser", curUser);
+                bookFrag.setArguments(bund);
+                ((Activity_Home) getActivity()).switchFragment(bookFrag);
+            });
+            System.out.println("BOOK DESUE ||| "+bk.toString());
+
+            youmightlike.addView(v);
+        }
+        for(Book bk : mostViewList){
+            View v = View.inflate(getContext(), R.layout.suggested_book_item, null);
+            KenBurnsView banner = (KenBurnsView) v.findViewById(R.id.book_img);
+
+            int resId = getContext().getResources().getIdentifier(String.format("drawable/%s", bk.getPhoto()), null, getContext().getPackageName());
+            banner.setImageResource(resId);
+
+            ImageView v2 = v.findViewById(R.id.cover2);
+            v2.setImageResource(resId);
+            Bitmap bm=((BitmapDrawable)v2.getDrawable()).getBitmap();
+            Blurry.with(getContext()).from(bm).into(v2);
+
+            ((TextView) v.findViewById(R.id.book_views)).setText(OlbookUtils.shortenNumber(bk.getLikes()) + " 👁");
+            ((TextView) v.findViewById(R.id.book_saved)).setText(OlbookUtils.shortenNumber(bk.getSave()) + " 🔖");
+
+            banner.setOnClickListener(e -> {
+                Fragment_BookInfo bookFrag = new Fragment_BookInfo();
+                Bundle bund = new Bundle();
+                bund.putSerializable("curBook", bk);
+                bund.putSerializable("curUser", curUser);
+                bookFrag.setArguments(bund);
+                ((Activity_Home) getActivity()).switchFragment(bookFrag);
+            });
+            System.out.println("BOOK DESUE ||| "+bk.toString());
+
+            mostViews.addView(v);
+        }
+        for(Book bk : mostSavedList){
+            View v = View.inflate(getContext(), R.layout.suggested_book_item, null);
+            KenBurnsView banner = (KenBurnsView) v.findViewById(R.id.book_img);
+
+            int resId = getContext().getResources().getIdentifier(String.format("drawable/%s", bk.getPhoto()), null, getContext().getPackageName());
+            banner.setImageResource(resId);
+
+            ImageView v2 = v.findViewById(R.id.cover2);
+            v2.setImageResource(resId);
+            Bitmap bm=((BitmapDrawable)v2.getDrawable()).getBitmap();
+            Blurry.with(getContext()).from(bm).into(v2);
+
+            ((TextView) v.findViewById(R.id.book_views)).setText(OlbookUtils.shortenNumber(bk.getLikes()) + " 👁");
+            ((TextView) v.findViewById(R.id.book_saved)).setText(OlbookUtils.shortenNumber(bk.getSave()) + " 🔖");
+
+            banner.setOnClickListener(e -> {
+                Fragment_BookInfo bookFrag = new Fragment_BookInfo();
+                Bundle bund = new Bundle();
+                bund.putSerializable("curBook", bk);
+                bund.putSerializable("curUser", curUser);
+                bookFrag.setArguments(bund);
+                ((Activity_Home) getActivity()).switchFragment(bookFrag);
+            });
+            System.out.println("BOOK DESUE ||| "+bk.toString());
+
+            mostSaved.addView(v);
+        }
     }
 
     public void openDialog() {

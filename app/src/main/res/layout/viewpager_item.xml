@@ -20,11 +20,12 @@
             android:layout_height="match_parent"
             android:layout_margin="16dp"
             app:cardCornerRadius="16dp"
-            android:elevation="10dp">
+            android:elevation="24dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:elevation="24dp"
                 android:outlineAmbientShadowColor="@color/shad1"
                 android:outlineSpotShadowColor="@color/shad1"
                 tools:layout_editor_absoluteX="30dp"
@@ -105,7 +106,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/book_img">
 
                     <TextView
-                        android:id="@+id/book_likes"
+                        android:id="@+id/book_views"
                         android:layout_width="wrap_content"
                         android:layout_height="19dp"
                         android:layout_marginHorizontal="4dp"
@@ -116,7 +117,7 @@
                         android:textSize="16sp" />
 
                     <TextView
-                        android:id="@+id/book_saves"
+                        android:id="@+id/book_saved"
                         android:layout_width="wrap_content"
                         android:layout_height="18dp"
                         android:layout_marginHorizontal="4dp"

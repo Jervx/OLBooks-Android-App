@@ -12,59 +12,149 @@
         android:layout_height="wrap_content">
 
 
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:scrollbars="none"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_greet6">
+
+            <LinearLayout
+                android:id="@+id/mostsaved"
+                android:layout_width="wrap_content"
+                android:layout_height="400dp"
+                android:orientation="horizontal" />
+        </HorizontalScrollView>
+
+        <HorizontalScrollView
+            android:id="@+id/mostreadscroll"
+            android:layout_width="match_parent"
+            android:scrollbars="none"
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_greet5">
+
+            <LinearLayout
+                android:id="@+id/mostviews"
+                android:layout_width="wrap_content"
+                android:layout_height="400dp"
+                android:orientation="horizontal" />
+        </HorizontalScrollView>
+
+        <HorizontalScrollView
+            android:id="@+id/horizontalScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_greet4">
+
+            <LinearLayout
+                android:id="@+id/youmightlike"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="400dp">
+
+            </LinearLayout>
+        </HorizontalScrollView>
+
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_image"
-            android:layout_width="34dp"
-            android:layout_height="34dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="24dp"
             android:src="@drawable/empty_profile"
             app:civ_border_color="@color/transparent"
             app:civ_border_width="2dp"
-            app:layout_constraintBottom_toBottomOf="@+id/textView_greet"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.043"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView_greet"
-            app:layout_constraintVertical_bias="0.294" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textView_greet"
             android:layout_width="153dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="9dp"
-            android:layout_marginTop="18dp"
+            android:layout_marginStart="14dp"
             android:fontFamily="@font/open_sans_semibold"
             android:text="Hey User"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/Black"
             android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/profile_image"
             app:layout_constraintStart_toEndOf="@+id/profile_image"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/profile_image" />
 
         <TextView
             android:id="@+id/textView_greet3"
-            android:layout_width="153dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:fontFamily="@font/open_sans_semibold"
-            android:text="Great Books"
+            android:text="Great Books 📖"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@color/CoffeeBlack_900"
-            android:textSize="18sp"
+            android:textColor="?colorSecondaryVariant"
+            android:textSize="30sp"
             app:layout_constraintStart_toStartOf="@+id/textView_greet2"
             app:layout_constraintTop_toBottomOf="@+id/textView_greet2" />
 
         <TextView
             android:id="@+id/textView_greet2"
-            android:layout_width="358dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="18dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
             android:fontFamily="@font/open_sans_semibold"
-            android:text="Discover &amp; Explore"
+            android:text="Let's 🚀 Discover &amp; Explore "
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textColor="@color/firefly_800"
             android:textSize="34sp"
             app:layout_constraintStart_toStartOf="@+id/profile_image"
             app:layout_constraintTop_toBottomOf="@+id/textView_greet" />
+
+        <TextView
+            android:id="@+id/textView_greet4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="18dp"
+            android:fontFamily="@font/open_sans_semibold"
+            android:text="Book's You might like 👍"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="@color/firefly_800"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewpager_swipe" />
+
+        <TextView
+            android:id="@+id/textView_greet5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="18dp"
+            android:fontFamily="@font/open_sans_semibold"
+            android:text="Most Read 👁"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="@color/firefly_800"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
+
+        <TextView
+            android:id="@+id/textView_greet6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="18dp"
+            android:fontFamily="@font/open_sans_semibold"
+            android:text="Most Saved 🔖"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="@color/firefly_800"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mostreadscroll" />
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewpager_swipe"
@@ -79,7 +169,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/chip_container">
+            app:layout_constraintTop_toBottomOf="@+id/chip_container"
+            app:layout_constraintVertical_bias="0.0">
 
         </androidx.viewpager2.widget.ViewPager2>
 
@@ -112,7 +203,7 @@
             android:layout_height="48dp"
             android:layout_marginHorizontal="14dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="34dp"
             android:drawableRight="@drawable/ic_search"
             android:ems="10"
             android:fontFamily="@font/open_sans"
@@ -126,7 +217,7 @@
             android:id="@+id/btn_send_new_pass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/CoffeeBlack_400"
+            android:background="?colorPrimary"
             android:backgroundTint="@color/transparent"
             android:padding="8dp"
             android:src="@drawable/ic_baseline_filter_list_24"
