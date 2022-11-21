@@ -17,5 +17,16 @@
     <color name="shad1">#5D86C2</color>
 
     <color name="white">#fff</color>
+    <color name="bookinfobgimage">#f7f7f7</color>
+
+<!-- firefly -->
+    <color name="firefly_100">#A05F7D</color>
+    <color name="firefly_200">#8A5274</color>
+    <color name="firefly_300">#824E70</color>
+    <color name="firefly_400">#703D60</color>
+    <color name="firefly_500">#703D60</color>
+    <color name="firefly_600">#5C2E4F</color>
+    <color name="firefly_700">#4B2946</color>
+    <color name="firefly_800">#3D2230</color>
 
 </resources>

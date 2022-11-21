@@ -64,7 +64,7 @@ public class VPAdapter extends RecyclerView.Adapter<VPAdapter.ViewHolder> {
 
         rerender(holder, viewPagerItem);
 
-        holder.btnView.setOnClickListener(e -> {
+        holder.bookImage.setOnClickListener(e -> {
             Fragment_BookInfo bookFrag = new Fragment_BookInfo();
             Bundle bund = new Bundle();
             bund.putSerializable("curBook", viewPagerItem.getBook());

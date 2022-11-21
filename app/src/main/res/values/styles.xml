@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <style name="Theme.App" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
-        <item name="colorPrimary">@color/CoffeeBlack_900</item>
-        <item name="colorOnSurface">@color/CoffeeBlack_400</item>
-    </style>
-</resources>
