@@ -105,7 +105,7 @@ public class Fragment_Bookmarks extends Fragment {
             ImageButton remove = v.findViewById(R.id.remove_btn);
 
             ((TextView) v.findViewById(R.id.book_tit)).setText(OlbookUtils.shortener(bk.getTitle()));
-            ((TextView) v.findViewById(R.id.book_auth)).setText(bk.getAuthor());
+            ((TextView) v.findViewById(R.id.book_auth)).setText(OlbookUtils.shorterAuthors(bk.getAuthor(), false));
 
             read.setOnClickListener(e -> {
                 dbHelper.likeBook(bk.getLikes() + 1, bk.getIsbn_10());

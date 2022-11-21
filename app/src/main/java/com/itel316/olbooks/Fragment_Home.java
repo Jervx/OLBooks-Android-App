@@ -94,7 +94,7 @@ public class Fragment_Home extends Fragment {
         searchField = (EditText) view.findViewById(R.id.search_field);
         chipContainer = (ChipGroup) view.findViewById(R.id.chip_container);
         btn_addCategoryTag = (ImageButton) view.findViewById(R.id.btn_send_new_pass);
-        textview_tags = (TextView) view.findViewById(R.id.textview_tags);
+//        textview_tags = (TextView) view.findViewById(R.id.textview_tags);
         swipe_view = (ViewPager2) view.findViewById(R.id.viewpager_swipe);
         greets = (TextView) view.findViewById((R.id.textView_greet));
         profile_image = view.findViewById(R.id.profile_image);
@@ -124,6 +124,9 @@ public class Fragment_Home extends Fragment {
 
         curUser = (User) getArguments().getSerializable("curUser");
         curUser.fetchSelf(dbHelper);
+        greets.setText("Hi " + curUser.getFname());
+
+
         if (curUser.getImg() != null) {
             try {
                 File imgFile = new File(curUser.getImg());
@@ -160,8 +163,9 @@ public class Fragment_Home extends Fragment {
             Chip tag_chip = new Chip(getActivity());
             tag_chip.setText(((EditText)tagDialog.findViewById(R.id.email_input)).getText().toString());
             tag_chip.setCloseIconVisible(true);
-            tag_chip.setTextColor(getResources().getColor(R.color.Bg));
-            tag_chip.setChipBackgroundColor(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.CoffeeBlack_700)));
+
+//            tag_chip.setTextColor(getResources().getColor(R.color.Bg));
+//            tag_chip.setChipBackgroundColor(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.CoffeeBlack_700)));
 
             tag_chip.setOnCloseIconClickListener(ev -> {
                 category_tags.remove(tag_chip);
@@ -187,9 +191,10 @@ public class Fragment_Home extends Fragment {
 
     public void loadBooks() {
         int additional = searchField.getText().toString().length() > 0 ? 1 : 0;
+
         String chosenTags[] = new String[category_tags.size() + additional];
 
-        if(additional == 1)  chosenTags[chosenTags.length - 1] = searchField.getText().toString();
+        if(additional == 1){ chosenTags[chosenTags.length - 1] = searchField.getText().toString(); }
 
         int counter = 0;
         for (Chip chp : category_tags) {
@@ -204,9 +209,7 @@ public class Fragment_Home extends Fragment {
             viewPagerItemArrayList.add(viewPagerItem);
         }
 
-
-        textview_tags.setText(String.format("%d book found", books.length));
-        greets.setText("Hi " + curUser.getFname());
+//        textview_tags.setText(String.format("%d book found", books.length));
         if(books.length == 0) nofound.setVisibility(View.VISIBLE);
         else nofound.setVisibility(View.GONE);
         renderViewPager();
@@ -234,4 +237,8 @@ public class Fragment_Home extends Fragment {
         swipe_view.setPageTransformer(comptrans);
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
 }
