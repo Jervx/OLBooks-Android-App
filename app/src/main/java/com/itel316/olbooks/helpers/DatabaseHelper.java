@@ -60,6 +60,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return true;
     }
 
+
+    public Cursor execRawQuery(String query, String[] args) {
+        Cursor result = null;
+        try {
+            result = this.getWritableDatabase().rawQuery(query, args);
+        } catch (Exception e) {
+        }
+        return result;
+    }
+
+
     public Boolean insertUser(String email, String fname, String lname, String password, int isLoggedIn, int role, Date dateJoined) {
         try {
             SQLiteDatabase db = this.getWritableDatabase();
@@ -383,15 +394,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         System.out.printf("Liked %s from booklist for user\n", isbn_10);
         this.getWritableDatabase().execSQL(String.format("UPDATE book set like_count=%d where isbn_10='%s'", newValue,isbn_10));
         return true;
-    }
-
-    public Cursor execRawQuery(String query, String[] args) {
-        Cursor result = null;
-        try {
-            result = this.getWritableDatabase().rawQuery(query, args);
-        } catch (Exception e) {
-        }
-        return result;
     }
 
     public static String formatDateTime(Date date) {

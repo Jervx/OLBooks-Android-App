@@ -106,8 +106,13 @@ public class pdfreader extends AppCompatActivity {
 
             pagesindicator.setText("1 - "+totalPage);
             jumpage.setOnClickListener(er -> {
-                int tojump = Integer.parseInt(pagejumpinpt.getText().toString());
-                if(tojump - 1 > totalPage - 1){
+                String PAGE = pagejumpinpt.getText().toString();
+                if(PAGE.length() == 0) {
+                    Toast.makeText(this, "Please provide a valid page", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                int tojump = Integer.parseInt(PAGE);
+                if( tojump <= 0 || tojump - 1 > totalPage - 1){
                     Toast.makeText(this, "This book only have 1 - "+totalPage + " 😕", Toast.LENGTH_LONG).show();
                     return;
                 }
