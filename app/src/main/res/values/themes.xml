@@ -2,15 +2,16 @@
     <!-- Base application theme. -->
     <style name="Theme.Olbooks" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/CoffeeBlack_900</item>
-        <item name="colorPrimaryVariant">@color/Bg</item>
-        <item name="colorOnPrimary">@color/Bg</item>
+        <item name="colorPrimary">@color/pirate_400</item>
+        <item name="colorPrimaryVariant">@color/pirate_200</item>
+        <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/CoffeeBlack_400</item>
-        <item name="colorSecondaryVariant">@color/CoffeeBlack_400</item>
-        <item name="colorOnSecondary">@color/CoffeeBlack_400</item>
+        <item name="colorSecondary">@color/pirate_300</item>
+        <item name="colorSecondaryVariant">@color/pirate_400</item>
+        <item name="colorOnSecondary">@color/white</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">@color/CoffeeBlack_900</item>
+        <item name="android:statusBarColor">?colorSecondaryVariant</item>
+        <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
         <!-- Customize your theme here. -->
     </style>
 </resources>

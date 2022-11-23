@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@drawable/bg"
+    android:background="@color/white"
     android:layout_height="match_parent"
     tools:context=".Fragment_Home">
 
@@ -12,51 +12,154 @@
         android:layout_height="wrap_content">
 
 
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:scrollbars="none"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_greet6">
+
+            <LinearLayout
+                android:id="@+id/mostsaved"
+                android:layout_width="wrap_content"
+                android:layout_height="400dp"
+                android:orientation="horizontal" />
+        </HorizontalScrollView>
+
+        <HorizontalScrollView
+            android:id="@+id/mostreadscroll"
+            android:layout_width="match_parent"
+            android:scrollbars="none"
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_greet5">
+
+            <LinearLayout
+                android:id="@+id/mostviews"
+                android:layout_width="wrap_content"
+                android:layout_height="400dp"
+                android:orientation="horizontal" />
+        </HorizontalScrollView>
+
+        <HorizontalScrollView
+            android:id="@+id/horizontalScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_greet4">
+
+            <LinearLayout
+                android:id="@+id/youmightlike"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="400dp">
+
+            </LinearLayout>
+        </HorizontalScrollView>
+
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_image"
-            android:layout_width="34dp"
-            android:layout_height="34dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="24dp"
             android:src="@drawable/empty_profile"
-            app:civ_border_color="@color/CoffeeBlack_400"
+            app:civ_border_color="@color/transparent"
             app:civ_border_width="2dp"
-            app:layout_constraintBottom_toBottomOf="@+id/textView_greet"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.043"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView_greet"
-            app:layout_constraintVertical_bias="0.294" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textView_greet"
             android:layout_width="153dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
-            android:fontFamily="@font/gentium_book_basic"
+            android:layout_marginStart="14dp"
+            android:fontFamily="@font/open_sans_semibold"
             android:text="Hey User"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@color/CoffeeBlack_900"
-            android:textSize="24sp"
+            android:textColor="@color/Black"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/profile_image"
             app:layout_constraintStart_toEndOf="@+id/profile_image"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/profile_image" />
+
+        <TextView
+            android:id="@+id/textView_greet3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/open_sans_semibold"
+            android:text="Great Books 📖"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="?colorSecondaryVariant"
+            android:textSize="30sp"
+            app:layout_constraintStart_toStartOf="@+id/textView_greet2"
+            app:layout_constraintTop_toBottomOf="@+id/textView_greet2" />
 
         <TextView
             android:id="@+id/textView_greet2"
-            android:layout_width="358dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/gentium_book_basic_bold"
-            android:text="Let's Start Reading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/open_sans_semibold"
+            android:text="Let's 🚀 Discover &amp; Explore "
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="@color/CoffeeBlack_900"
+            android:textColor="@color/firefly_800"
             android:textSize="34sp"
             app:layout_constraintStart_toStartOf="@+id/profile_image"
             app:layout_constraintTop_toBottomOf="@+id/textView_greet" />
 
+        <TextView
+            android:id="@+id/textView_greet4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="18dp"
+            android:fontFamily="@font/open_sans_semibold"
+            android:text="Book's You might like 👍"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="@color/firefly_800"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewpager_swipe" />
+
+        <TextView
+            android:id="@+id/textView_greet5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="18dp"
+            android:fontFamily="@font/open_sans_semibold"
+            android:text="Most Read 👁"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="@color/firefly_800"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
+
+        <TextView
+            android:id="@+id/textView_greet6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="18dp"
+            android:fontFamily="@font/open_sans_semibold"
+            android:text="Most Saved 🔖"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="@color/firefly_800"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mostreadscroll" />
+
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewpager_swipe"
             android:layout_width="match_parent"
-            android:layout_height="630dp"
+            android:layout_height="530dp"
             android:layout_marginVertical="18dp"
             android:background="@color/transparent"
             android:paddingStart="34dp"
@@ -66,7 +169,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/chip_container">
+            app:layout_constraintTop_toBottomOf="@+id/chip_container"
+            app:layout_constraintVertical_bias="0.0">
 
         </androidx.viewpager2.widget.ViewPager2>
 
@@ -84,11 +188,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="12dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textview_tags">
+            app:layout_constraintTop_toBottomOf="@+id/search_field">
 
 
         </com.google.android.material.chip.ChipGroup>
@@ -99,30 +203,29 @@
             android:layout_height="48dp"
             android:layout_marginHorizontal="14dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="34dp"
             android:drawableRight="@drawable/ic_search"
             android:ems="10"
-            android:fontFamily="@font/gentium_book_basic"
+            android:fontFamily="@font/open_sans"
             android:hint="Search Book"
             android:inputType="textPersonName"
-            android:textSize="20sp"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView_greet2" />
+            app:layout_constraintTop_toBottomOf="@+id/textView_greet3" />
 
         <ImageButton
             android:id="@+id/btn_send_new_pass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:background="?colorPrimary"
+            android:backgroundTint="@color/transparent"
             android:padding="8dp"
-            android:background="@color/CoffeeBlack_400"
-            android:backgroundTint="@color/CoffeeBlack_700"
-            android:tint="@color/Bg"
             android:src="@drawable/ic_baseline_filter_list_24"
+            app:layout_constraintBottom_toBottomOf="@+id/search_field"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.304"
             app:layout_constraintStart_toEndOf="@+id/search_field"
-            app:layout_constraintTop_toBottomOf="@+id/textView_greet2" />
+            app:layout_constraintTop_toTopOf="@+id/search_field" />
 
         <ImageView
             android:id="@+id/nofound"

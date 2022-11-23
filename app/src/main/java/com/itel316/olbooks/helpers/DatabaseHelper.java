@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.itel316.olbooks.models.Book;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.TimeZone;
 
@@ -55,6 +56,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public boolean truncateDbs(SQLiteDatabase db, String[] dbNames) {
         for (String dbName : dbNames)
             db.execSQL(String.format("DELETE FROM %s", dbName));
+        db.close();
         return true;
     }
 
@@ -80,7 +82,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             values.put("img", "");
 
             db.insert("user", null, values);
-
+            db.close();
             return true;
         } catch (Exception e) {
         }
@@ -93,6 +95,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             ContentValues values = new ContentValues();
             values.put("isLoggedIn",toState);
             db.update("user", values, "userId = "+userId, null);
+            db.close();
 //            Cursor users = db.rawQuery("SELECT * FROM user where userId = "+userId, null);
         } catch (Exception e) {
         }
@@ -134,7 +137,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             values.put("like_count", like_count);
 
             db.insert("book", null, values);
-
+            db.close();
             return true;
         } catch (Exception e) {
         }
@@ -210,6 +213,100 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return books;
     }
 
+    public ArrayList<Book> getSuggestedBook( int count ){
+        SQLiteDatabase db = getWritableDatabase();
+
+        String statement = "SELECT * FROM book ORDER BY RANDOM() LIMIT "+count+";";
+
+        ArrayList<Book> bk = new ArrayList<>();
+
+        Cursor bookResult = execRawQuery(statement, null);
+
+        if(bookResult.getCount() > 0){
+            while(bookResult.moveToNext()) {
+                bk.add(new Book(
+                        bookResult.getString(0),
+                        bookResult.getString(1),
+                        bookResult.getString(2),
+                        bookResult.getString(3),
+                        bookResult.getString(4),
+                        bookResult.getString(5),
+                        bookResult.getString(6),
+                        bookResult.getString(7),
+                        bookResult.getString(8),
+                        bookResult.getString(9),
+                        bookResult.getInt(10),
+                        bookResult.getInt(11)
+                ));
+            }
+        }
+
+        return bk;
+    }
+
+    public ArrayList<Book> getMostViews( int count ){
+        SQLiteDatabase db = getWritableDatabase();
+
+        String statement = "SELECT * FROM book ORDER BY like_count DESC LIMIT "+count+";";
+
+        ArrayList<Book> bk = new ArrayList<>();
+
+        Cursor bookResult = execRawQuery(statement, null);
+
+        if(bookResult.getCount() > 0){
+            while(bookResult.moveToNext()) {
+                bk.add(new Book(
+                        bookResult.getString(0),
+                        bookResult.getString(1),
+                        bookResult.getString(2),
+                        bookResult.getString(3),
+                        bookResult.getString(4),
+                        bookResult.getString(5),
+                        bookResult.getString(6),
+                        bookResult.getString(7),
+                        bookResult.getString(8),
+                        bookResult.getString(9),
+                        bookResult.getInt(10),
+                        bookResult.getInt(11)
+                ));
+            }
+        }
+
+        return bk;
+    }
+
+    public ArrayList<Book> getMostSaved( int count ){
+        SQLiteDatabase db = getWritableDatabase();
+
+        String statement = "SELECT * FROM book ORDER BY save_count DESC LIMIT "+count+";";
+
+        ArrayList<Book> bk = new ArrayList<>();
+
+        Cursor bookResult = execRawQuery(statement, null);
+
+        if(bookResult.getCount() > 0){
+            while(bookResult.moveToNext()) {
+                bk.add(new Book(
+                        bookResult.getString(0),
+                        bookResult.getString(1),
+                        bookResult.getString(2),
+                        bookResult.getString(3),
+                        bookResult.getString(4),
+                        bookResult.getString(5),
+                        bookResult.getString(6),
+                        bookResult.getString(7),
+                        bookResult.getString(8),
+                        bookResult.getString(9),
+                        bookResult.getInt(10),
+                        bookResult.getInt(11)
+                ));
+            }
+        }
+
+        return bk;
+    }
+
+
     public Book [] getBooksBySearch(String search){
 
         String likes = "";
@@ -268,7 +365,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             values.put("isbn_13", isbn_13);
 
             db.insert("booklist", null, values);
-
+            db.close();
             return true;
         } catch (Exception e) {
         }

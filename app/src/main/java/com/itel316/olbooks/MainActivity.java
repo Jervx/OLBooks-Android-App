@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
                 homeIntent.putExtra("CURRENT_USER", user);
                 startActivity(homeIntent);
                 finish();
-            }, 2000);
+           }, 1000);
         else
             handler.postDelayed(() -> {
                 Intent SignInIntent = new Intent(getApplicationContext(), Activity_Sign_In.class);

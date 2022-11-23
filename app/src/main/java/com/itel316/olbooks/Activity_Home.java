@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.ImageButton;
 
 import com.itel316.olbooks.databinding.ActivityHomeBinding;
 import com.itel316.olbooks.helpers.DatabaseHelper;
@@ -24,6 +25,8 @@ public class Activity_Home extends AppCompatActivity {
     ActivityHomeBinding binding;
     private User currentUser;
     private Fragment curFrag;
+    private DatabaseHelper dbHelper;
+    private ImageButton homebtn, bookmarkbtn, profilebtn;
 
     Intent dataProvided;
 
@@ -34,9 +37,13 @@ public class Activity_Home extends AppCompatActivity {
         setContentView(binding.getRoot());
         getSupportActionBar().hide();
 
+        homebtn = findViewById(R.id.homebtn);
+        bookmarkbtn = findViewById(R.id.bookmarkbtn);
+        profilebtn = findViewById(R.id.profilebtn);
+
         currentUser = (User) getIntent().getSerializableExtra("CURRENT_USER");
 
-        DatabaseHelper dbHelper = new DatabaseHelper(getApplicationContext());
+        dbHelper = new DatabaseHelper(getApplicationContext());
 
         dbHelper.updateUserLoginState(currentUser.getUserId(), 1);
 
@@ -48,33 +55,60 @@ public class Activity_Home extends AppCompatActivity {
         initial_frag.setArguments(initialBundle);
         switchFragment(initial_frag);
 
-        binding.bottomNavigationView.setOnItemSelectedListener(nav_item -> {
+        homebtn.setImageResource(R.drawable.ic_home_filled);
 
-            int id = nav_item.getItemId();
+//
+//        binding.bottomNavigationView.setOnItemSelectedListener(nav_item -> {
+//
+//            int id = nav_item.getItemId();
+//            Bundle bund = new Bundle();
+//            currentUser.fetchSelf(dbHelper);
+//            bund.putSerializable("curUser", currentUser);
+//
+//            if (id == R.id.navigation_home) {
+//                Fragment_Home fragHome = new Fragment_Home();
+//                fragHome.setArguments(bund);
+//                switchFragment(fragHome);
+//            }
+//
+//            if (id == R.id.navigation_bookmarks) {
+//                Fragment_Bookmarks fragBookmarks = new Fragment_Bookmarks();
+//                fragBookmarks.setArguments(bund);
+//                switchFragment(fragBookmarks);
+//            }
+//
+//            if (id == R.id.navigation_profiles) {
+//                Fragment_Profile fragProfile = new Fragment_Profile();
+//                fragProfile.setArguments(bund);
+//                switchFragment(fragProfile);
+//            }
+//
+//            return true;
+//        });
+    }
+
+    public void changeFrag(View nav_item){
+            int id = nav_item.getId();
             Bundle bund = new Bundle();
             currentUser.fetchSelf(dbHelper);
             bund.putSerializable("curUser", currentUser);
 
-            if (id == R.id.navigation_home) {
+            if (id == R.id.homebtn) {
                 Fragment_Home fragHome = new Fragment_Home();
                 fragHome.setArguments(bund);
                 switchFragment(fragHome);
             }
-
-            if (id == R.id.navigation_bookmarks) {
+            if (id == R.id.bookmarkbtn) {
                 Fragment_Bookmarks fragBookmarks = new Fragment_Bookmarks();
                 fragBookmarks.setArguments(bund);
                 switchFragment(fragBookmarks);
             }
 
-            if (id == R.id.navigation_profiles) {
+            if (id == R.id.profilebtn) {
                 Fragment_Profile fragProfile = new Fragment_Profile();
                 fragProfile.setArguments(bund);
                 switchFragment(fragProfile);
             }
-
-            return true;
-        });
     }
 
     public void switchFragment(Fragment frag) {
@@ -85,9 +119,24 @@ public class Activity_Home extends AppCompatActivity {
         FragmentTransaction fragTrans = fragMan.beginTransaction();
         curFrag = frag;
 
+        updateBottomNavIcons(curFrag);
+
         if (fragMan.getBackStackEntryCount() > 8) fragMan.popBackStack();
 
         fragTrans.replace(R.id.frame_fragment, frag).addToBackStack("root_frag").commit();
+    }
+
+    public void updateBottomNavIcons (Fragment frag){
+        homebtn.setImageResource(R.drawable.ic_home);
+        bookmarkbtn.setImageResource(R.drawable.ic_bookmark_outline);
+        profilebtn.setImageResource(R.drawable.ic_user);
+
+        if(curFrag.getClass() == Fragment_Home.class)
+            homebtn.setImageResource(R.drawable.ic_home_filled);
+        if(curFrag.getClass() == Fragment_Bookmarks.class)
+            bookmarkbtn.setImageResource(R.drawable.ic_bookmark_filled);
+        if(curFrag.getClass() == Fragment_Profile.class)
+            profilebtn.setImageResource(R.drawable.ic_user_filled);
     }
 
     @Override
@@ -105,14 +154,9 @@ public class Activity_Home extends AppCompatActivity {
                 Fragment frag = getSupportFragmentManager().getFragments().get(frags.size() > 0 ? frags.size() - 1 : 0);
                 curFrag = frag;
 
-                if (frag.getClass() == Fragment_Home.class) foc = 0;
-                if (frag.getClass() == Fragment_Bookmarks.class) foc = 1;
-                if (frag.getClass() == Fragment_Profile.class) foc = 2;
+                updateBottomNavIcons(curFrag);
             }
 
-            if(foc != cnt){
-                binding.bottomNavigationView.getMenu().getItem(foc).setChecked(true);
-            }
         } else finish();
     }
 

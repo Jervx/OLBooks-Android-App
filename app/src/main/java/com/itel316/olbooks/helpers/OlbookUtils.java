@@ -26,6 +26,29 @@ public class OlbookUtils {
         return val;
     }
 
+    public static String shorterAuthors(String authors, boolean isAll){
+        String builded = "";
+
+        if(!isAll){
+            String [] auths = authors.split("<~>");
+
+            if(auths.length == 1) return auths[0];
+
+            if(auths.length == 2){
+                String concatened = authors.replace("<~>", " & ");
+                if(concatened.length() >= 28) builded = auths[0] + " & " + auths.length + " other";
+                builded = concatened;
+            }else if(auths.length > 2){
+                builded = auths[0] + " & " + auths.length + " others";
+            }
+
+        }else{
+            builded = authors.replaceAll("<~>", ", ");
+        }
+
+        return builded;
+    }
+
     public static String toISODateString(Date date) {
         SimpleDateFormat sdf;
         sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
