@@ -1,7 +1,6 @@
 plugins {
-    id 'com.android.application'
+    id 'com.android.application' version '7.3.0'
 }
-
 android {
     namespace 'com.itel316.olbooks'
     compileSdk 32
@@ -52,4 +51,10 @@ dependencies {
     implementation files('libs/activation.jar')
     implementation files('libs/additionnal.jar')
     implementation files('libs/mail.jar')
+}
+task wrapper(type: Wrapper){
+    gradleVersion = '7.2'
+}
+task prepareKotlinBuildScriptModel {
+
 }
