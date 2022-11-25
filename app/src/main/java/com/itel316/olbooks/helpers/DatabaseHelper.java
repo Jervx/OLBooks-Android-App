@@ -251,7 +251,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 ));
             }
         }
-
+        bookResult.close();
         return bk;
     }
 
@@ -282,7 +282,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 ));
             }
         }
-
+        bookResult.close();
         return bk;
     }
 
@@ -313,7 +313,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 ));
             }
         }
-
+        bookResult.close();
         return bk;
     }
 

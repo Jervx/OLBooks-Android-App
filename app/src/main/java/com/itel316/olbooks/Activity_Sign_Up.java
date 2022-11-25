@@ -97,7 +97,7 @@ public class Activity_Sign_Up extends AppCompatActivity {
                 re_password.setError("Password Doesn't Match!");
                 return;
             }
-
+            findUser.close();
             genKey = OlbookUtils.randomKey(6);
 
             String buildMsg = OlbookUtils.HTML_NewVerification.replace("${name}", i_name);
@@ -137,6 +137,7 @@ public class Activity_Sign_Up extends AppCompatActivity {
                 User user = new User(result.getString(1), dbhelper);
                 dbhelper.updateUserLoginState(user.getUserId(), 1);
                 homeIntent.putExtra("CURRENT_USER", user);
+                result.close();
                 startActivity(homeIntent);
                 finish();
             }

@@ -100,10 +100,7 @@ public class Fragment_Home extends Fragment {
         category_tags = new ArrayList<>();
         this.container = container;
 
-        mostViews = (LinearLayout) view.findViewById(R.id.mostviews);
         youmightlike = (LinearLayout) view.findViewById(R.id.youmightlike);
-        mostSaved = (LinearLayout) view.findViewById(R.id.mostsaved);
-
         searchField = (EditText) view.findViewById(R.id.search_field);
         chipContainer = (ChipGroup) view.findViewById(R.id.chip_container);
         btn_addCategoryTag = (ImageButton) view.findViewById(R.id.btn_send_new_pass);
@@ -167,8 +164,6 @@ public class Fragment_Home extends Fragment {
 
     public void loadMiniBooks(){
         youMightLikeList = dbHelper.getSuggestedBook(limit);
-        mostViewList = dbHelper.getMostViews(limit);
-        mostSavedList = dbHelper.getMostSaved(limit);
         renderMinis();
     }
 
@@ -199,60 +194,6 @@ public class Fragment_Home extends Fragment {
             System.out.println("BOOK DESUE ||| "+bk.toString());
 
             youmightlike.addView(v);
-        }
-        for(Book bk : mostViewList){
-            View v = View.inflate(getContext(), R.layout.suggested_book_item, null);
-            KenBurnsView banner = (KenBurnsView) v.findViewById(R.id.book_img);
-
-            int resId = getContext().getResources().getIdentifier(String.format("drawable/%s", bk.getPhoto()), null, getContext().getPackageName());
-            banner.setImageResource(resId);
-
-            ImageView v2 = v.findViewById(R.id.cover2);
-            v2.setImageResource(resId);
-            Bitmap bm=((BitmapDrawable)v2.getDrawable()).getBitmap();
-            Blurry.with(getContext()).from(bm).into(v2);
-
-            ((TextView) v.findViewById(R.id.book_views)).setText(OlbookUtils.shortenNumber(bk.getLikes()) + " 👁");
-            ((TextView) v.findViewById(R.id.book_saved)).setText(OlbookUtils.shortenNumber(bk.getSave()) + " 🔖");
-
-            banner.setOnClickListener(e -> {
-                Fragment_BookInfo bookFrag = new Fragment_BookInfo();
-                Bundle bund = new Bundle();
-                bund.putSerializable("curBook", bk);
-                bund.putSerializable("curUser", curUser);
-                bookFrag.setArguments(bund);
-                ((Activity_Home) getActivity()).switchFragment(bookFrag);
-            });
-            System.out.println("BOOK DESUE ||| "+bk.toString());
-
-            mostViews.addView(v);
-        }
-        for(Book bk : mostSavedList){
-            View v = View.inflate(getContext(), R.layout.suggested_book_item, null);
-            KenBurnsView banner = (KenBurnsView) v.findViewById(R.id.book_img);
-
-            int resId = getContext().getResources().getIdentifier(String.format("drawable/%s", bk.getPhoto()), null, getContext().getPackageName());
-            banner.setImageResource(resId);
-
-            ImageView v2 = v.findViewById(R.id.cover2);
-            v2.setImageResource(resId);
-            Bitmap bm=((BitmapDrawable)v2.getDrawable()).getBitmap();
-            Blurry.with(getContext()).from(bm).into(v2);
-
-            ((TextView) v.findViewById(R.id.book_views)).setText(OlbookUtils.shortenNumber(bk.getLikes()) + " 👁");
-            ((TextView) v.findViewById(R.id.book_saved)).setText(OlbookUtils.shortenNumber(bk.getSave()) + " 🔖");
-
-            banner.setOnClickListener(e -> {
-                Fragment_BookInfo bookFrag = new Fragment_BookInfo();
-                Bundle bund = new Bundle();
-                bund.putSerializable("curBook", bk);
-                bund.putSerializable("curUser", curUser);
-                bookFrag.setArguments(bund);
-                ((Activity_Home) getActivity()).switchFragment(bookFrag);
-            });
-            System.out.println("BOOK DESUE ||| "+bk.toString());
-
-            mostSaved.addView(v);
         }
     }
 

@@ -11,38 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:scrollbars="none"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView_greet6">
-
-            <LinearLayout
-                android:id="@+id/mostsaved"
-                android:layout_width="wrap_content"
-                android:layout_height="400dp"
-                android:orientation="horizontal" />
-        </HorizontalScrollView>
-
-        <HorizontalScrollView
-            android:id="@+id/mostreadscroll"
-            android:layout_width="match_parent"
-            android:scrollbars="none"
-            android:layout_height="match_parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView_greet5">
-
-            <LinearLayout
-                android:id="@+id/mostviews"
-                android:layout_width="wrap_content"
-                android:layout_height="400dp"
-                android:orientation="horizontal" />
-        </HorizontalScrollView>
-
         <HorizontalScrollView
             android:id="@+id/horizontalScrollView"
             android:layout_width="match_parent"
@@ -127,34 +95,6 @@
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/viewpager_swipe" />
-
-        <TextView
-            android:id="@+id/textView_greet5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="18dp"
-            android:fontFamily="@font/open_sans_semibold"
-            android:text="Most Read 👁"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="@color/firefly_800"
-            android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
-
-        <TextView
-            android:id="@+id/textView_greet6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="18dp"
-            android:fontFamily="@font/open_sans_semibold"
-            android:text="Most Saved 🔖"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="@color/firefly_800"
-            android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mostreadscroll" />
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewpager_swipe"

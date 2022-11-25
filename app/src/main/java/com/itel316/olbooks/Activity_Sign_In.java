@@ -68,7 +68,7 @@ public class Activity_Sign_In extends AppCompatActivity {
                 password.setError("Wrong Password!");
                 return;
             }
-
+            findUser.close();
             Intent homeIntent = new Intent(getApplicationContext(), Activity_Home.class);
             homeIntent.putExtra("CURRENT_USER", user);
             startActivity(homeIntent);

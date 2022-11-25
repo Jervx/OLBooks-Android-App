@@ -74,6 +74,7 @@ public class User implements Serializable {
         setIsLoggedIn(findUser.getInt(5));
         setLiked(findUser.getString(6));
         setImg(findUser.getString(9));
+        findUser.close();
         this.bookList = getBookList(dbhelper);
     }
 
