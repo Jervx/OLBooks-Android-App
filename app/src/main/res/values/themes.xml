@@ -10,8 +10,12 @@
         <item name="colorSecondaryVariant">@color/pirate_400</item>
         <item name="colorOnSecondary">@color/white</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">?colorSecondaryVariant</item>
+        <item name="android:statusBarColor">@color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+
         <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
         <!-- Customize your theme here. -->
     </style>
 </resources>

@@ -36,6 +36,24 @@
             <!--                app:layout_constraintTop_toTopOf="parent" />-->
 
             <ImageView
+                android:id="@+id/cover_blur"
+                android:layout_width="393dp"
+                android:layout_height="275dp"
+                android:layout_marginStart="1dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginBottom="1dp"
+                android:adjustViewBounds="true"
+                android:cropToPadding="false"
+                android:elevation="26dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/apk_logo"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/apk_logo" />
+
+            <ImageView
                 android:id="@+id/cover"
                 android:layout_width="244dp"
                 android:layout_height="match_parent"
@@ -53,6 +71,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/apk_logo" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView

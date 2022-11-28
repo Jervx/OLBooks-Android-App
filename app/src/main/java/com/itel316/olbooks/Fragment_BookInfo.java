@@ -1,6 +1,8 @@
 package com.itel316.olbooks;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -21,6 +23,8 @@ import com.itel316.olbooks.models.User;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import jp.wasabeef.blurry.Blurry;
 
 public class Fragment_BookInfo extends Fragment {
 
@@ -73,15 +77,15 @@ public class Fragment_BookInfo extends Fragment {
             Activity_Home parent = (Activity_Home) getActivity();
             parent.onBackPressed();
         });
-//        cover_blur = (ImageView) view.findViewById(R.id.cover_blur);
+        cover_blur = (ImageView) view.findViewById(R.id.cover_blur);
 
         int resId = getContext().getResources().getIdentifier(String.format("drawable/%s", curBook.getPhoto()), null, getContext().getPackageName());
-//        cover_blur.setImageResource(resId);
+        cover_blur.setImageResource(resId);
 
         btn_startRead = view.findViewById(R.id.btn_startRead);
 
-//        Bitmap bm=((BitmapDrawable)cover_blur.getDrawable()).getBitmap();
-//        Blurry.with(getContext()).from(bm).into(cover_blur);
+        Bitmap bm=((BitmapDrawable)cover_blur.getDrawable()).getBitmap();
+        Blurry.with(getContext()).from(bm).into(cover_blur);
 
         ((ImageView) view.findViewById(R.id.cover)).setImageResource(resId);
 

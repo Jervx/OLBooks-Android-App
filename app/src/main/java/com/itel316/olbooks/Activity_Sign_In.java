@@ -117,7 +117,7 @@ public class Activity_Sign_In extends AppCompatActivity {
 
                 JavaMailAPI javaMailAPI = new JavaMailAPI(this, i_em, "OLBook Temporary Password", buildMsg);
                 javaMailAPI.execute();
-
+                findUser.close();
                 recover.dismiss();
             });
 

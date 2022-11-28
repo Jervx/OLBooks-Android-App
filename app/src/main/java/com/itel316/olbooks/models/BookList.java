@@ -47,5 +47,6 @@ public class BookList implements Serializable {
             System.out.println("LOADED : " + books[x].toString());
             x++;
         }
+        myList.close();
     }
 }

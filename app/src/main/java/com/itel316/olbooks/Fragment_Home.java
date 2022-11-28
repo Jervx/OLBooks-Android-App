@@ -54,6 +54,7 @@ public class Fragment_Home extends Fragment {
     private ArrayList<Chip> category_tags;
 
     private Book books[];
+    private long start;
 
     private ChipGroup chipContainer;
     private ImageButton btn_addCategoryTag;
@@ -116,7 +117,6 @@ public class Fragment_Home extends Fragment {
         btn_addCategoryTag.setOnClickListener(e -> {
             openDialog();
         });
-
         searchField.addTextChangedListener(new TextWatcher() {
 
             public void afterTextChanged(Editable s) {
@@ -126,7 +126,9 @@ public class Fragment_Home extends Fragment {
             }
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                System.out.println("Called loadBooks");
                 loadBooks();
+                System.out.println("Done Called loadBooks");
             }
         });
 
@@ -171,7 +173,7 @@ public class Fragment_Home extends Fragment {
         for(Book bk : youMightLikeList){
             View v = View.inflate(getContext(), R.layout.suggested_book_item, null);
             KenBurnsView banner = (KenBurnsView) v.findViewById(R.id.book_img);
-
+            System.out.println("BOOK : "+bk.getPhoto()+" : "+bk.getTitle());
             int resId = getContext().getResources().getIdentifier(String.format("drawable/%s", bk.getPhoto()), null, getContext().getPackageName());
             banner.setImageResource(resId);
 
@@ -262,6 +264,7 @@ public class Fragment_Home extends Fragment {
     }
 
     public void renderViewPager() {
+        System.out.println("Render vpager");
         VPAdapter vpAdapter = new VPAdapter(viewPagerItemArrayList, (Activity_Home) getActivity(), getActivity().findViewById(R.id.frame_fragment), curUser, dbHelper);
 
         swipe_view.setAdapter(vpAdapter);
@@ -281,6 +284,7 @@ public class Fragment_Home extends Fragment {
         });
 
         swipe_view.setPageTransformer(comptrans);
+        System.out.println("Done render vpager");
     }
 
     @Override

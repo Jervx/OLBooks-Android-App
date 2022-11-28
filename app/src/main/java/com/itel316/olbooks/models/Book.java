@@ -48,6 +48,8 @@ public class Book implements Serializable {
             this.like_count = myList.getInt(11);
             System.out.println("FOUND "+this.toString());
         }
+
+        myList.close();
     }
 
     public void setPhoto(String photo) {

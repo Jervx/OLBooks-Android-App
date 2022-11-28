@@ -14,9 +14,10 @@ import java.util.Date;
 import java.util.TimeZone;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-
+    Context myContext;
     public DatabaseHelper(Context context) {
         super(context, "LibMa.db", null, 1);
+        myContext = context;
     }
 
     @Override
@@ -133,6 +134,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
             ContentValues values = new ContentValues();
 
+//            System.out.println("CHECKING PHOTO : " + title + " : -> " + photo);
+//            int resId = myContext.getResources().getIdentifier(String.format("drawable/%s", photo), null,  myContext.getPackageName());
+//            if(resId < 0) System.out.println("DOES NOT MATCH");
 //            isbn_10, isbn_13, title, author , category, description, pubDate, dateAdded, pdfFile, save_count, like_count
             values.put("photo", photo);
             values.put("isbn_10", isbn_10);
@@ -156,7 +160,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public Book [] getBooks(){
-        Cursor bookResult = execRawQuery("SELECT * FROM book", null);
+        Cursor bookResult = execRawQuery("SELECT * FROM book ORDER BY RANDOM() LIMIT 15", null);
         Book [] books = new Book[bookResult.getCount()];
 
         int x = 0;
@@ -195,9 +199,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             counter ++;
         }
 
-        String prepared = "SELECT * FROM book";
+        String prepared = "SELECT * FROM book ORDER BY RANDOM() LIMIT 15";
 
-        if(tags.length > 0) prepared = String.format("SELECT * FROM book where %s", likes);
+        if(tags.length > 0) prepared = String.format("SELECT * FROM book where %s ORDER BY RANDOM() LIMIT 15", likes);
         System.out.println("PREP : "+ prepared);
         Cursor bookResult = execRawQuery(prepared, null);
         Book [] books = new Book[bookResult.getCount()];
@@ -325,7 +329,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String fields = "title like '%<~>%%' or category like '%<~>%' or author like '%<~>%'";
         likes += fields.replaceAll("<~>", search);
 
-        String prepared = String.format("SELECT * FROM book where %s", likes);
+        String prepared = String.format("SELECT * FROM book where %s ORDER BY RANDOM() LIMIT 15", likes);
 
         Cursor bookResult = execRawQuery(prepared, null);
         Book [] books = new Book[bookResult.getCount()];
@@ -348,7 +352,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             );
             x++;
         }
-
+        bookResult.close();
         return books;
     }
 
@@ -376,7 +380,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             values.put("isbn_13", isbn_13);
 
             db.insert("booklist", null, values);
-            db.close();
+            foundBook.close();
             return true;
         } catch (Exception e) {
         }
