@@ -27,6 +27,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.flaviofaria.kenburnsview.KenBurnsView;
 import com.google.android.material.chip.Chip;
@@ -210,6 +211,10 @@ public class Fragment_Home extends Fragment {
         btn_add_filter.setOnClickListener(e -> {
             Chip tag_chip = new Chip(getActivity());
             tag_chip.setText(((EditText)tagDialog.findViewById(R.id.email_input)).getText().toString());
+            if(tag_chip.getText().length() == 0) {
+                Toast.makeText(getContext(), "Please input something", Toast.LENGTH_LONG).show();
+                return;
+            }
             tag_chip.setCloseIconVisible(true);
 
 //            tag_chip.setTextColor(getResources().getColor(R.color.Bg));
